@@ -1,0 +1,537 @@
+/* ============================================================
+   🌑 PREMIUM THEME — Noir • Gris • Doré
+   Mobile First — Full Compatible index + script.js
+   Fichier CSS nettoyé et unifié (Nov. 2025)
+============================================================ */
+:root {
+    /* PALETTE */
+    --bg: #f0f0f0;
+    --card: #ffffff;
+    --text: #333333;
+    --muted: #555555;
+
+    --gold: #d95e00;       /* ORANGE PROFOND */
+    --gold-dark: #b34d00;
+
+    --radius: 16px;
+    --shadow: 0 4px 12px rgba(0,0,0,0.10);
+    --shadow-hover: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* =========================================
+   GLOBAL
+========================================= */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Poppins", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; display: block; }
+
+.container {
+    padding: 0 15px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* =========================================
+   HEADER PREMIUM
+========================================= */
+header {
+    height: 220px;
+    position: relative;
+    background-image: url("images/header-bg.jpg");
+    background-size: cover;
+    background-position: center 40%;
+    overflow: hidden;
+}
+
+.header-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(2px);
+    z-index: 1;
+}
+
+.header-center {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0 10px;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .header-center { flex-direction: row; }
+}
+
+/* Logo */
+.logo-big {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    background: var(--card);
+    padding: 0;
+    box-shadow: none;
+}
+
+/* Shortcut icons (top-right) */
+.shortcut-icons {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+}
+.shortcut-icons a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    background: linear-gradient(145deg, var(--gold), var(--gold-dark));
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.shortcut-icons a img { width: 20px; height: 20px; }
+
+/* Burger button */
+.burger-img { position: fixed; top: 5px; left: 15px; z-index: 9999; }
+.burger-img img {
+    width: 45px; height: 45px; border-radius: 50%;
+    box-shadow: var(--shadow);
+    background: var(--card);
+    border: 1px solid var(--gold);
+    padding: 8px;
+    transition: transform .25s;
+}
+.burger-img img:hover { transform: scale(1.06); }
+
+/* =========================================
+   BURGER NAV (LATÉRAL)
+========================================= */
+.burger-nav-hidden {
+    position: fixed; top: 0; left: -100%;
+    width: 70%; height: 100%;
+    background: var(--card);
+    padding: 80px 20px;
+    display: flex; flex-direction: column; gap: 18px;
+    transition: left .3s ease;
+    z-index: 9998; overflow-y: auto;
+    border-right: 1px solid rgba(0,0,0,0.06);
+}
+.burger-nav-hidden a {
+    padding: 12px; font-size: 1rem; color: var(--text);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.burger-nav-hidden.active { left: 0; }
+
+/* =========================================
+   CATEGORIES HORIZONTALES (boutons)
+========================================= */
+.categories-horizontal {
+    display: flex; overflow-x: auto; gap: 12px; padding: 12px 16px;
+    white-space: nowrap; scrollbar-width: none;
+    margin-bottom: 10px;
+}
+.categories-horizontal::-webkit-scrollbar { display: none; }
+
+.categories-horizontal a {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    padding: 8px 18px;
+    border-radius: 999px;
+    color: #000;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: var(--shadow);
+    transition: transform .25s;
+}
+.categories-horizontal a:hover { transform: translateY(-2px); }
+
+/* =========================================
+   MENU GRID / ITEMS
+========================================= */
+#menu-grid { padding: 14px; }
+
+.items {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+@media (min-width: 680px) { .items { grid-template-columns: repeat(2,1fr); } }
+@media (min-width: 1100px) { .items { grid-template-columns: repeat(3,1fr); } }
+
+.menu-item {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0,0,0,0.08);
+    overflow: hidden; cursor: pointer; transition: transform .25s;
+}
+.menu-item:hover { transform: scale(1.02); box-shadow: var(--shadow-hover); }
+
+.item-img-wrapper {
+    width: 100%; height: 180px;
+    background-size: cover !important;
+    background-position: center !important;
+    background-color: #000;
+    pointer-events: none; user-select: none;
+    position: relative;
+}
+
+/* watermark inside item image */
+.item-img-wrapper::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url('images/logo-greycorner-watermark.png');
+    background-repeat: no-repeat; background-position: center;
+    background-size: 50%; opacity: 0.08; pointer-events: none; z-index: 2;
+}
+
+.item-info { padding: 14px; }
+
+/* Nom du plat - garder en noir */
+.item-name {
+    display: inline-block;
+    flex-grow: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text); /* <-- NOM DES PLATS EN NOIR */
+    padding-right: 15px;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Ligne nom + prix */
+.item-price-line {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    width: 100%; margin-bottom: 4px;
+}
+
+/* Prix */
+.item-price {
+    flex-shrink: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.2;
+}
+
+.item-desc {
+    margin-top: 0; margin-bottom: 8px;
+    color: var(--muted); font-size: 0.9rem;
+}
+
+/* =========================================
+   LIGHTBOX PROTÉGÉE (MENU)
+========================================= */
+.secure-lightbox {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    display: none; justify-content: center; align-items: center; z-index: 999999;
+}
+.secure-lightbox.active { display: flex; }
+.secure-lightbox-content {
+    width: 88%; max-width: 480px; height: 70vh;
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+    pointer-events: none; position: relative;
+}
+.secure-lightbox-content::after {
+    /* watermark on zoomed image */
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url('images/logo-greycorner-watermark.png');
+    background-repeat: no-repeat; background-position: center; background-size: 30%;
+    opacity: 0.2; pointer-events: none; z-index: 9999;
+}
+
+/* =========================================
+   BACK TO TOP
+========================================= */
+.back-to-top {
+    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+    width: 55px; height: 55px; background: var(--gold); border-radius: 50%;
+    font-size: 28px; color: #000; display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow); cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity .3s, transform .2s;
+    z-index: 9999;
+}
+.back-to-top.show { opacity: 1; pointer-events: auto; }
+
+/* =========================================
+   LANG SWITCH
+========================================= */
+.lang-switch {
+    position: fixed; bottom: 90px; right: 18px; display: flex; flex-direction: column; gap: 10px;
+}
+.lang-button {
+    background: var(--card); border: 1px solid rgba(0,0,0,0.35);
+    padding: 6px 8px; color: var(--text); border-radius: 10px; font-size: 18px; box-shadow: var(--shadow);
+}
+.lang-button.active { background: var(--gold); color: #000; border: none; transform: scale(1.06); }
+
+/* =========================================
+   GOOGLE REVIEW FLOAT
+========================================= */
+.google-review-fab {
+    position: fixed; bottom: 20px; left: 20px; background: var(--gold);
+    padding: 10px; border-radius: 18px; box-shadow: var(--shadow); z-index: 9999;
+}
+.google-review-fab img { width: 45px; height: 45px; }
+
+/* =========================================
+   BANDE ÉVÉNEMENT
+========================================= */
+.event-banner {
+    display: block; width: 100%; padding: 10px 15px; margin-bottom: 5px;
+    background: linear-gradient(90deg, #c19b2c, #e0c26b);
+    color: #000; font-weight: 700; font-size: 1.1rem; text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5); transition: transform .2s;
+}
+.event-banner:hover { transform: scale(1.01); }
+
+.event-text-wrapper { display: flex; width: max-content; animation: continuousScroll 25s linear infinite; }
+.event-banner .event-text { white-space: nowrap; display: block; padding-right: 50px; }
+
+@keyframes continuousScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+@media (max-width: 768px) {
+    .event-banner { font-size: .9rem; padding: 6px 10px; margin-top: 10px; }
+    .event-text-wrapper { animation-duration: 20s; }
+}
+
+/* =========================================
+   NOM RESTAURANT (logo text)
+========================================= */
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 700; color: var(--gold); text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(193,155,44,0.5); text-align: center; margin: 0; line-height: 1.1;
+}
+@media (min-width: 768px) { .logo-text { font-size: 3rem; } }
+
+/* =========================================
+   TITRES DE CATÉGORIES — PROPRE
+   (Appliqué seulement aux titres générés dans #menu-grid
+    tout en excluant les noms des plats (.item-name))
+========================================= */
+#menu-grid h2.category-title,
+#menu-grid h3.category-title,
+#menu-grid .category-title-block,
+#menu-grid h2:not(.item-name),
+#menu-grid h3:not(.item-name) {
+    color: var(--gold) !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    margin: 25px 0 10px;
+    border-bottom: 3px solid var(--gold);
+    padding-bottom: 6px;
+    text-align: center;
+}
+/* ============================================================
+   🌐 OPTIMISATION MOBILE (max-width: 480px)
+   Version légère, compacte, lisible et adaptée aux smartphones
+============================================================ */
+@media (max-width: 480px) {
+
+    /* Marges globales resserrées */
+    body {
+        font-size: 14px;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    /* Header plus compact */
+    header {
+        height: 130px;
+        background-position: center 55%;
+    }
+
+    .logo-big {
+        width: 85px;
+        height: 85px;
+    }
+
+    /* Catégories horizontales : hauteur + compacte */
+    .categories-horizontal {
+        gap: 8px;
+        padding: 8px 10px;
+    }
+
+    .categories-horizontal a {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        border-radius: 40px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    /* Titres des catégories */
+    #menu-grid h2:not(.item-name),
+    #menu-grid h3:not(.item-name) {
+        font-size: 1.2rem;
+        margin: 20px 0 8px;
+        padding-bottom: 4px;
+        border-bottom-width: 2px;
+    }
+
+    /* Cartes */
+    .menu-item {
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    /* Image des plats : plus compacte pour scroll rapide */
+    .item-img-wrapper {
+        height: 140px;
+        background-size: cover !important;
+    }
+
+    /* Zone texte : padding réduit */
+    .item-info {
+        padding: 10px;
+    }
+
+    /* Nom du plat : taille mobile */
+    .item-name {
+        font-size: 1rem;
+        padding-right: 10px;
+    }
+
+    /* Prix : légèrement réduit */
+    .item-price {
+        font-size: 1rem;
+    }
+
+    /* Description : plus petite et plus claire */
+    .item-desc {
+        font-size: 0.8rem;
+        line-height: 1.2;
+    }
+
+    /* Bouton back to top (plus petit) */
+    .back-to-top {
+        width: 45px;
+        height: 45px;
+        bottom: 18px;
+        font-size: 22px;
+    }
+
+    /* Icônes burger */
+    .burger-img img {
+        width: 40px;
+        height: 40px;
+        padding: 6px;
+    }
+
+    /* Bande événement */
+    .event-banner {
+        padding: 6px 8px;
+        font-size: 0.9rem;
+    }
+
+    /* Champ de recherche plus compact */
+    #searchInput {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+}
+/* ============================================================
+   🛠 FIX : MENU QUI GLISSE À GAUCHE SUR MOBILE
+   Recentre tout le contenu du menu
+============================================================ */
+#menu-grid,
+.menu-item,
+.items {
+    margin: 0 auto !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Force la grille à rester centrée */
+.items {
+    display: grid !important;
+    justify-content: center !important;
+    align-items: start !important;
+}
+
+/* Empêche un décalage horizontal */
+body, html {
+    overflow-x: hidden !important;
+}
+
+/* Désactive tout décalage forcé ajouté par erreur */
+#menu-grid * {
+    position: relative !important;
+    left: 0 !important;
+}
+/* ============================
+   Mobile: images carrées et plus grandes
+   Rend les cartes plus visibles et empêchent l'étirement
+   À ajouter en dernier dans style.css
+   ============================ */
+@media (max-width: 680px) {
+
+  /* Faire que chaque carte prenne toute la largeur disponible
+     (plus grande zone d'image) */
+  .items {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    padding: 0 10px;
+  }
+
+  /* Carte : largeur pleine + max pour éviter très large sur grands mobiles */
+  .menu-item {
+    width: 100% !important;
+    max-width: 540px;
+    margin: 0 auto;
+    border-radius: 12px;
+  }
+
+  /* Image wrapper -> forcer ratio 1:1 (carré) et cover */
+  .item-img-wrapper {
+    width: 100%;
+    height: auto;                /* remove fixed height */
+    aspect-ratio: 4 / 3;         /* force carré */
+    background-size: cover !important;
+    background-position: center !important;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  /* Si tu veux un peu plus grand (preserve espace pour le texte), augmenter ratio */
+  /* .item-img-wrapper { aspect-ratio: 4 / 3; }  /* uncomment to try 4:3 */
+
+  /* Réduire le padding texte pour gagner de la place */
+  .item-info {
+    padding: 10px !important;
+  }
+
+  /* Nom du plat et prix un peu + grands pour lisibilité */
+  .item-name { font-size: 1.05rem !important; }
+  .item-price { font-size: 1.05rem !important; }
+
+  /* Empêche un débordement horizontal dû à des marges */
+  body, html, #menu-grid { overflow-x: hidden !important; }
+}
+
