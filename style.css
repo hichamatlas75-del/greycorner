@@ -535,3 +535,41 @@ body, html {
   body, html, #menu-grid { overflow-x: hidden !important; }
 }
 
+/* =========================================
+   DEUXIÈME BANDE (Caisse / Match)
+========================================= */
+.ticker-cashier {
+    width: 100%;
+    background: #c12c2c; /* Rouge profond pour le contraste */
+    color: #ffffff;
+    padding: 8px 0;
+    overflow: hidden;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    margin-bottom: 15px;
+}
+
+.ticker-cashier-wrapper {
+    display: flex;
+    width: max-content;
+    animation: scrollTicker 20s linear infinite;
+}
+
+.ticker-cashier-wrapper span {
+    padding-right: 80px; /* Espace entre les répétitions */
+    white-space: nowrap;
+}
+
+@keyframes scrollTicker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.33%); }
+}
+
+/* Optimisation mobile pour la 2ème bande */
+@media (max-width: 480px) {
+    .ticker-cashier {
+        font-size: 0.75rem;
+        padding: 5px 0;
+    }
+}
