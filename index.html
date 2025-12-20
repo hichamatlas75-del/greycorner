@@ -3,69 +3,47 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <title>Grey Corner Café — Menu</title>
-
-    <!-- POLICES -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-    <!-- CSS PRINCIPAL -->
     <link rel="stylesheet" href="style.css">
 </head>
-<!-- FLECHE REMONTER EN HAUT -->
-<div id="backToTop" class="back-to-top">
-    ⬆
-</div>
 
 <body>
+    <div id="backToTop" class="back-to-top">⬆</div>
 
-    <!-- 🟦 BOUTON BURGER (MENU SLIDE) -->
     <div id="burger" class="burger-img">
         <img src="images/menu-style3.png" alt="Menu" />
     </div>
 
-  <!-- 🟥 MENU BURGER (LATÉRAL) -->
-<nav id="burgerNav" class="burger-nav-hidden">
-    <a href="#petit-dejeuner" data-i18n data-fr="Petit Déj" data-en="Breakfast" data-de="Frühstück">Petit Déj</a>
-    <a href="#entrees" data-i18n data-fr="Entrées" data-en="Starters" data-de="Vorspeisen">Entrées</a>
-    <a href="#plats" data-i18n data-fr="Plats" data-en="Main Dishes" data-de="Hauptgerichte">Plats</a>
-    <a href="#sandwichs" data-i18n data-fr="Sandwichs" data-en="Sandwiches" data-de="Sandwiches">Sandwichs</a>
-    <a href="#burgers" data-i18n data-fr="Burgers" data-en="Burgers" data-de="Burger">Burgers</a>
-    <a href="#panini" data-i18n data-fr="Panini" data-en="Panini" data-de="Panini">Panini</a>
-    <a href="#pizza" data-i18n data-fr="Pizza" data-en="Pizza" data-de="Pizza">Pizza</a>
-    <a href="#pasta" data-i18n data-fr="Pasta" data-en="Pasta" data-de="Pasta">Pasta</a>
-    <a href="#crepes" data-i18n data-fr="Crêpes" data-en="Crepes" data-de="Pfannkuchen">Crêpes</a>
-    <a href="#gateaux" data-i18n data-fr="Gâteaux" data-en="Cakes" data-de="Kuchen">Gâteaux</a>
-    <a href="#boissons" data-i18n data-fr="Boissons" data-en="Drinks" data-de="Getränke">Boissons</a>
-    <a href="#glace" data-i18n data-fr="Glace" data-en="Ice Cream" data-de="Eis">Glace</a>
-</nav>
+    <nav id="burgerNav" class="burger-nav-hidden">
+        <a href="#petit-dejeuner" data-i18n data-fr="Petit Déj" data-en="Breakfast" data-de="Frühstück">Petit Déj</a>
+        <a href="#entrees" data-i18n data-fr="Entrées" data-en="Starters" data-de="Vorspeisen">Entrées</a>
+        <a href="#plats" data-i18n data-fr="Plats" data-en="Main Dishes" data-de="Hauptgerichte">Plats</a>
+        <a href="#sandwichs" data-i18n data-fr="Sandwichs" data-en="Sandwiches" data-de="Sandwiches">Sandwichs</a>
+        <a href="#burgers" data-i18n data-fr="Burgers" data-en="Burgers" data-de="Burger">Burgers</a>
+        <a href="#panini" data-i18n data-fr="Panini" data-en="Panini" data-de="Panini">Panini</a>
+        <a href="#pizza" data-i18n data-fr="Pizza" data-en="Pizza" data-de="Pizza">Pizza</a>
+        <a href="#pasta" data-i18n data-fr="Pasta" data-en="Pasta" data-de="Pasta">Pasta</a>
+        <a href="#crepes" data-i18n data-fr="Crêpes" data-en="Crepes" data-de="Pfannkuchen">Crêpes</a>
+        <a href="#gateaux" data-i18n data-fr="Gâteaux" data-en="Cakes" data-de="Kuchen">Gâteaux</a>
+        <a href="#boissons" data-i18n data-fr="Boissons" data-en="Drinks" data-de="Getränke">Boissons</a>
+        <a href="#glace" data-i18n data-fr="Glace" data-en="Ice Cream" data-de="Eis">Glace</a>
+    </nav>
 
-<!-- 🟧 OVERLAY (DOIT ÊTRE EN DEHORS DU NAV !) -->
-<div id="burgerOverlay" class="burger-overlay"></div>
+    <div id="burgerOverlay" class="burger-overlay"></div>
 
-
-    <!-- 🟫 HEADER -->
     <header>
-        
         <div class="header-overlay"></div> 
         <div class="container header-center">
-
             <img src="images/logo.png" class="logo-big" alt="Grey Corner">
-
-
             <div class="shortcut-icons">
                 <a href="tel:+212535940168"><img src="images/phone.jpg" alt="Téléphone"></a>
                 <a href="https://www.instagram.com/greycornerfes/" target="_blank" rel="noopener"><img src="images/instagram.png" alt="Instagram"></a>
                 <a href="https://maps.app.goo.gl/8CH1GGAvo2no6zp27" target="_blank" rel="noopener"><img src="images/maps.png" alt="Google Maps"></a>
                 <a href="#" id="shareMenu"><img src="images/partage.png" alt="Partager"></a>
-         
+            </div>
+        </div>
     </header>
-<!-- LIGHTBOX PROTÉGÉE -->
-<div id="secureLightbox" class="secure-lightbox">
-    <div class="secure-lightbox-content"></div>
-</div>
-
-   
 
     <!-- 🟩 BARRE HORIZONTALE DES CATÉGORIES -->
    <nav class="categories-horizontal">
@@ -82,38 +60,35 @@
     <a href="#boissons" data-i18n data-fr="Boissons" data-en="Drinks" data-de="Getränke">Boissons</a>
     <a href="#glace" data-i18n data-fr="Glace" data-en="Ice Cream" data-de="Eis">Glace</a>
 </nav>
- <div class="search-wrapper">
-    <input
-        id="searchInput"
-        type="search"
-        placeholder="Rechercher un plat..."
-        />
-</div>
 
-<div id="eventBanner" class="event-banner" data-event-img="images/evenement.jpg">
-    <div class="event-text-wrapper">
-        <span class="event-text">✨ Événement Spécial-MATCH MAROC ! ✨</span>
-        <span class="event-text">✨ Événement Spécial-MATCH MAROC ! ✨</span>
+    <div class="search-wrapper">
+        <input id="searchInput" type="search" placeholder="Rechercher un plat..." />
     </div>
-</div>
 
-<main id="menu-grid"></main> 
+    <div id="eventBanner" class="event-banner" data-event-img="images/evenement.jpg">
+        <div class="event-text-wrapper">
+            <span class="event-text">✨ Événement Spécial-MATCH MAROC ! ✨</span>
+            <span class="event-text">✨ Événement Spécial-MATCH MAROC ! ✨</span>
+        </div>
     </div>
-<div id="secureLightbox" class="secure-lightbox">
-    <div class="secure-lightbox-content">
-        <button class="close-btn">×</button>
-    </div>
-    <div id="secureLightboxCaption" class="secure-lightbox-caption"></div>
-</div>
-  
 
-    <!-- MENU (généré automatiquement par script.js) -->
+    <div class="ticker-cashier">
+        <div class="ticker-cashier-wrapper">
+            <span>⚽ PASSER À LA CAISSE POUR RÉSERVER VOS PLACES POUR LE MATCH MAROC ! 🇲🇦</span>
+            <span>⚽ PASSER À LA CAISSE POUR RÉSERVER VOS PLACES POUR LE MATCH MAROC ! 🇲🇦</span>
+            <span>⚽ PASSER À LA CAISSE POUR RÉSERVER VOS PLACES POUR LE MATCH MAROC ! 🇲🇦</span>
+        </div>
+    </div>
+
     <main id="menu-grid"></main>
 
-<main id="menu-grid"></main>
+    <div id="secureLightbox" class="secure-lightbox">
+        <div class="secure-lightbox-content">
+            <button class="close-btn">×</button>
+        </div>
+        <div id="secureLightboxCaption" class="secure-lightbox-caption"></div>
+    </div>
 
-<footer>
-    <!-- FOOTER -->
     <footer>
         <div class="container">
             © 2025 Grey Corner Café — Menu trilingue.
@@ -122,35 +97,29 @@
         </div>
     </footer>
 
-    <!-- LANG SWITCH -->
     <div class="lang-switch">
         <button class="lang-button active" data-lang="fr">🇫🇷</button>
         <button class="lang-button" data-lang="en">🇬🇧</button>
         <button class="lang-button" data-lang="de">🇩🇪</button>
     </div>
 
-    <!-- GOOGLE REVIEW FLOATING -->
     <a href="https://g.page/r/CXF0QNm04m-ZEAE/review" class="google-review-fab" target="_blank" rel="noopener">
         <img src="images/google-review.png" alt="Google Review">
     </a>
 
-    <!-- JS PRINCIPAL -->
     <script src="script.js" defer></script>
-
-    <!-- JS PARTAGE WHATSAPP -->
     <script>
         document.getElementById("shareMenu").addEventListener("click", e => {
             e.preventDefault();
             const url = window.location.href;
-            const lang = localStorage.getItem("lang") || "fr";
             const messages = {
                 fr: "🍽️ Découvrez le menu Grey Corner Café !\n\n",
                 en: "🍽️ Discover the Grey Corner Café menu!\n\n",
                 de: "🍽️ Entdecken Sie das Menü des Grey Corner Café!\n\n"
             };
+            const lang = localStorage.getItem("lang") || "fr";
             window.open("https://wa.me/?text=" + encodeURIComponent(messages[lang] + url));
         });
     </script>
-
 </body>
 </html>
