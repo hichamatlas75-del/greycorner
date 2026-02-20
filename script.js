@@ -130,9 +130,9 @@ isNew: true
       {
         name: { fr: "COMPAGNAD", en: "COPAGNARD", de: "COMPAGNAR" },
         description: {
-          fr: "3 Œuf brouillé ,3 charcuterie, 2 pain cake chocolat ,pain seigle, huile d’olive , jben , mesclun salade, jus d'orange, boisson chaude au choix, dessert et eau minérale.",
-          en: "3 scrambled eggs, 3 cold cuts, 2 slices of chocolate cake, rye bread, olive oil, jben (fresh cheese), mesclun salad, orange juice, hot drink of your choice, dessert, and mineral water.",
-          de: "3 Rühreier, 3 Sorten Aufschnitt, 2 Stücke Schokoladenkuchen, Roggenbrot, Olivenöl, Jben (frischer Käse), Mesclun-Salat, Orangensaft, Heißgetränk nach Wahl, Dessert und Mineralwasser."
+          fr: "3 Œuf brouillé ,3 charcuterie, 2 pain cake chocolat ,pain seigle, huile d’olive , olive , mesclun salade, jus d'orange, boisson chaude au choix, dessert et eau minérale.",
+          en: "3 scrambled eggs, 3 cold cuts, 2 slices of chocolate cake, rye bread, olive oil, olive , mesclun salad, orange juice, hot drink of your choice, dessert, and mineral water.",
+          de: "3 Rühreier, 3 Sorten Aufschnitt, 2 Stücke Schokoladenkuchen, Roggenbrot, Olivenöl, schwarze Oliven , Mesclun-Salat, Orangensaft, Heißgetränk nach Wahl, Dessert und Mineralwasser."
         },
         price: "52",
         image: "images/petit-dej-compagnard.jpg",
@@ -215,7 +215,7 @@ isNew: true
           en: "Cheese toast, or Nutella crêpe, or waffle, or pancake, corn flakes, chocolate milk.",
           de: "Käsetoast, oder Nutella Crêpe, oder Waffel, oder Pfannkuchen, Cornflakes, Schokomilch."
         },
-        price: "38",
+        price: "40",
         image: "images/menu-enfant-pdj.jpg"
       }
     ]
