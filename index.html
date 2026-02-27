@@ -1,120 +1,254 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XD33HHNDHX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>Grey Corner • Menus</title>
 
-  gtag('config', 'G-XD33HHNDHX');
-</script>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Grey Corner Café — Menu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg1:#05070d;
+  --bg2:#02030a;
+  --gold:#f0d58a;
+  --gold2:#d9b35f;
+  --text:#f5f7ff;
+  --muted:rgba(245,247,255,.72);
+  --radius:26px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Poppins",sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(900px 620px at 15% -10%, rgba(240,213,138,.22), transparent 60%),
+    linear-gradient(180deg,var(--bg1),var(--bg2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px 12px;
+  transition:opacity .35s ease, transform .35s ease;
+}
+
+/* Animation sortie */
+body.fade-out{
+  opacity:0;
+  transform:scale(.98);
+}
+
+.wrap{width:min(560px,100%)}
+
+.card{
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 22px 70px rgba(0,0,0,.6);
+  overflow:hidden;
+  position:relative;
+}
+
+.top{
+  padding:18px 16px 12px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.logo{
+  width:60px;height:60px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid rgba(240,213,138,.4);
+}
+.logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+h1{
+  margin:0;
+  font-family:"Playfair Display",serif;
+  font-size:22px;
+}
+.sub{
+  margin-top:6px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.divider{
+  height:1px;
+  margin:0 14px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:.6;
+}
+
+.content{padding:14px}
+
+.welcome{
+  padding:14px;
+  border-radius:20px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(240,213,138,.2);
+  margin-bottom:14px;
+}
+.welcome b{color:var(--gold)}
+.welcome p{margin:0;color:var(--muted);font-size:13px}
+
+.grid{display:grid;gap:12px}
+
+.btn{
+  text-decoration:none;
+  color:var(--text);
+  border-radius:22px;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border:1px solid rgba(240,213,138,.25);
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  transition:all .2s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.btn:active{
+  transform:scale(.97);
+}
+
+/* Effet shimmer */
+.btn::after{
+  content:"";
+  position:absolute;
+  inset:-40% -60%;
+  background:linear-gradient(90deg,
+    transparent,
+    rgba(240,213,138,.2),
+    rgba(240,213,138,.4),
+    transparent);
+  transform:rotate(12deg) translateX(-30%);
+  opacity:.5;
+  pointer-events:none;
+}
+
+.tag{
+  font-size:11px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:rgba(245,247,255,.6);
+}
+.label{
+  margin-top:6px;
+  font-size:18px;
+  font-weight:700;
+}
+.hint{
+  margin-top:6px;
+  font-size:12.5px;
+  color:rgba(245,247,255,.7);
+}
+
+.icon{
+  width:46px;height:46px;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(240,213,138,.3);
+}
+.icon svg{
+  width:22px;height:22px;
+  stroke:var(--gold);
+  stroke-width:2;
+  fill:none;
+}
+
+.foot{
+  padding:12px 14px 16px;
+  text-align:center;
+  font-size:12px;
+  color:rgba(245,247,255,.55);
+}
+</style>
 </head>
 
 <body>
-    <div id="backToTop" class="back-to-top">⬆</div>
 
-    <div id="burger" class="burger-img">
-        <img src="images/menu-style3.png" alt="Menu" />
+<div class="wrap">
+  <div class="card">
+
+    <div class="top">
+      <div class="logo">
+        <img src="images/logo.png" alt="Grey Corner Logo">
+      </div>
+      <div>
+        <h1>Grey Corner • Fès</h1>
+        <div class="sub">Sélectionnez un menu</div>
+      </div>
     </div>
 
-    <nav id="burgerNav" class="burger-nav-hidden">
-        <a href="#petit-dejeuner" data-i18n data-fr="Petit Déj" data-en="Breakfast" data-de="Frühstück">Petit Déj</a>
-        <a href="#entrees" data-i18n data-fr="Entrées" data-en="Starters" data-de="Vorspeisen">Entrées</a>
-        <a href="#plats" data-i18n data-fr="Plats" data-en="Main Dishes" data-de="Hauptgerichte">Plats</a>
-        <a href="#sandwichs" data-i18n data-fr="Sandwichs" data-en="Sandwiches" data-de="Sandwiches">Sandwichs</a>
-        <a href="#burgers" data-i18n data-fr="Burgers" data-en="Burgers" data-de="Burger">Burgers</a>
-        <a href="#panini" data-i18n data-fr="Panini" data-en="Panini" data-de="Panini">Panini</a>
-        <a href="#pizza" data-i18n data-fr="Pizza" data-en="Pizza" data-de="Pizza">Pizza</a>
-        <a href="#pasta" data-i18n data-fr="Pasta" data-en="Pasta" data-de="Pasta">Pasta</a>
-        <a href="#crepes" data-i18n data-fr="Crêpes" data-en="Crepes" data-de="Pfannkuchen">Crêpes</a>
-        <a href="#gateaux" data-i18n data-fr="Gâteaux" data-en="Cakes" data-de="Kuchen">Gâteaux</a>
-        <a href="#boissons" data-i18n data-fr="Boissons" data-en="Drinks" data-de="Getränke">Boissons</a>
-        <a href="#glace" data-i18n data-fr="Glace" data-en="Ice Cream" data-de="Eis">Glace</a>
-    </nav>
+    <div class="divider"></div>
 
-    <div id="burgerOverlay" class="burger-overlay"></div>
+    <div class="content">
 
-    <header>
-        <div class="header-overlay"></div> 
-        <div class="container header-center">
-            <img src="images/logo.png" class="logo-big" alt="Grey Corner">
-            <div class="shortcut-icons">
-                <a href="tel:+212535940168"><img src="images/phone.jpg" alt="Téléphone"></a>
-                <a href="https://www.instagram.com/greycornerfes/" target="_blank" rel="noopener"><img src="images/instagram.png" alt="Instagram"></a>
-                <a href="https://maps.app.goo.gl/8CH1GGAvo2no6zp27" target="_blank" rel="noopener"><img src="images/maps.png" alt="Google Maps"></a>
-                <a href="#" id="shareMenu"><img src="images/partage.png" alt="Partager"></a>
-            </div>
-        </div>
-    </header>
+      <div class="welcome">
+        <p><b>Bienvenue</b><br>Accès direct aux menus officiels Grey Corner.</p>
+      </div>
 
-    <!-- 🟩 BARRE HORIZONTALE DES CATÉGORIES -->
-   <nav class="categories-horizontal">
-    <a href="#petit-dejeuner" data-i18n data-fr="Petit Déj" data-en="Breakfast" data-de="Frühstück">Petit Déj</a>
-    <a href="#entrees" data-i18n data-fr="Entrées" data-en="Starters" data-de="Vorspeisen">Entrées</a>
-    <a href="#plats" data-i18n data-fr="Plats" data-en="Main Dishes" data-de="Hauptgerichte">Plats</a>
-    <a href="#sandwichs" data-i18n data-fr="Sandwichs" data-en="Sandwiches" data-de="Sandwiches">Sandwichs</a>
-    <a href="#burgers" data-i18n data-fr="Burgers" data-en="Burgers" data-de="Burger">Burgers</a>
-    <a href="#panini" data-i18n data-fr="Panini" data-en="Panini" data-de="Panini">Panini</a>
-    <a href="#pizza" data-i18n data-fr="Pizza" data-en="Pizza" data-de="Pizza">Pizza</a>
-    <a href="#pasta" data-i18n data-fr="Pasta" data-en="Pasta" data-de="Pasta">Pasta</a>
-    <a href="#crepes" data-i18n data-fr="Crêpes" data-en="Crepes" data-de="Pfannkuchen">Crêpes</a>
-    <a href="#gateaux" data-i18n data-fr="Gâteaux" data-en="Cakes" data-de="Kuchen">Gâteaux</a>
-    <a href="#boissons" data-i18n data-fr="Boissons" data-en="Drinks" data-de="Getränke">Boissons</a>
-    <a href="#glace" data-i18n data-fr="Glace" data-en="Ice Cream" data-de="Eis">Glace</a>
-</nav>
+      <div class="grid">
 
-    <div class="search-wrapper">
-        <input id="searchInput" type="search" placeholder="Rechercher un plat..." />
+        <!-- MENU RAMADAN -->
+        <a class="btn nav-link" href="https://ramadan-greycorner.pages.dev/">
+          <div>
+            <div class="tag">Menu</div>
+            <div class="label">Ramadan</div>
+            <div class="hint">Formules Ftour & Offres spéciales</div>
+          </div>
+          <div class="icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 12.6A8.5 8.5 0 1 1 11.4 3a6.5 6.5 0 1 0 9.6 9.6Z"/>
+            </svg>
+          </div>
+        </a>
+
+        <!-- MENU PRINCIPAL -->
+        <a class="btn nav-link" href="https://greycornerfes.pages.dev/">
+          <div>
+            <div class="tag">Menu</div>
+            <div class="label">Menu Principal</div>
+            <div class="hint">Café, boissons, snacks & plats</div>
+          </div>
+          <div class="icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 8h10v6a5 5 0 0 1-5 5H7V8Z"/>
+              <path d="M17 9h2a3 3 0 0 1 0 6h-2"/>
+            </svg>
+          </div>
+        </a>
+
+      </div>
     </div>
 
+    <div class="foot">© Grey Corner</div>
 
-    <main id="menu-grid"></main>
+  </div>
+</div>
 
-    <div id="secureLightbox" class="secure-lightbox">
-        <div class="secure-lightbox-content">
-            <button class="close-btn">×</button>
-        </div>
-        <div id="secureLightboxCaption" class="secure-lightbox-caption"></div>
-    </div>
+<script>
+document.querySelectorAll('.nav-link').forEach(link=>{
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    document.body.classList.add('fade-out');
+    const url = this.href;
+    setTimeout(()=>{ window.location.href = url; }, 350);
+  });
+});
+</script>
 
-    <footer>
-        <div class="container">
-            © 2025 Grey Corner Café — Menu trilingue.
-            <br>
-            📞 <a href="tel:+212535940168">+212 535 940 168</a>
-        </div>
-    </footer>
-
-    <div class="lang-switch">
-        <button class="lang-button active" data-lang="fr">🇫🇷</button>
-        <button class="lang-button" data-lang="en">🇬🇧</button>
-        <button class="lang-button" data-lang="de">🇩🇪</button>
-    </div>
-
-    <a href="https://g.page/r/CXF0QNm04m-ZEAE/review" class="google-review-fab" target="_blank" rel="noopener">
-        <img src="images/google-review.png" alt="Google Review">
-    </a>
-
-    <script src="script.js" defer></script>
-    <script>
-        document.getElementById("shareMenu").addEventListener("click", e => {
-            e.preventDefault();
-            const url = window.location.href;
-            const messages = {
-                fr: "🍽️ Découvrez le menu Grey Corner Café !\n\n",
-                en: "🍽️ Discover the Grey Corner Café menu!\n\n",
-                de: "🍽️ Entdecken Sie das Menü des Grey Corner Café!\n\n"
-            };
-            const lang = localStorage.getItem("lang") || "fr";
-            window.open("https://wa.me/?text=" + encodeURIComponent(messages[lang] + url));
-        });
-    </script>
 </body>
 </html>
