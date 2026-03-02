@@ -5,16 +5,22 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <title>Grey Corner • Menus</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg1:#05070d;
-  --bg2:#02030a;
-  --gold:#f0d58a;
-  --gold2:#d9b35f;
-  --text:#f5f7ff;
-  --muted:rgba(245,247,255,.72);
+  --bg1:#0f1115;
+  --bg2:#0a0c10;
+
+  --card:#1a1d23;
+  --card2:#262a33;
+
+  --gold:#d4af37;
+  --gold-soft:rgba(212,175,55,.25);
+
+  --text:#f2f2f2;
+  --muted:rgba(242,242,242,.65);
+
   --radius:26px;
 }
 
@@ -25,7 +31,7 @@ body{
   font-family:"Poppins",sans-serif;
   color:var(--text);
   background:
-    radial-gradient(900px 620px at 15% -10%, rgba(240,213,138,.22), transparent 60%),
+    radial-gradient(900px 600px at 15% -10%, rgba(212,175,55,.12), transparent 60%),
     linear-gradient(180deg,var(--bg1),var(--bg2));
   display:flex;
   align-items:center;
@@ -34,19 +40,15 @@ body{
   transition:opacity .35s ease, transform .35s ease;
 }
 
-/* Animation sortie */
-body.fade-out{
-  opacity:0;
-  transform:scale(.98);
-}
+body.fade-out{ opacity:0; transform:scale(.98); }
 
 .wrap{width:min(560px,100%)}
 
 .card{
   border-radius:var(--radius);
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:0 22px 70px rgba(0,0,0,.6);
+  background:linear-gradient(180deg,var(--card),var(--bg2));
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 28px 80px rgba(0,0,0,.75);
   overflow:hidden;
   position:relative;
 }
@@ -59,10 +61,12 @@ body.fade-out{
 }
 
 .logo{
-  width:60px;height:60px;
-  border-radius:18px;
+  width:62px;height:62px;
+  border-radius:20px;
   overflow:hidden;
-  border:1px solid rgba(240,213,138,.4);
+  border:1px solid var(--gold-soft);
+  box-shadow:0 10px 25px rgba(0,0,0,.5);
+  background:#111317;
 }
 .logo img{
   width:100%;
@@ -75,6 +79,7 @@ h1{
   margin:0;
   font-family:"Playfair Display",serif;
   font-size:22px;
+  letter-spacing:.4px;
 }
 .sub{
   margin-top:6px;
@@ -86,7 +91,7 @@ h1{
   height:1px;
   margin:0 14px;
   background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  opacity:.6;
+  opacity:.5;
 }
 
 .content{padding:14px}
@@ -94,12 +99,20 @@ h1{
 .welcome{
   padding:14px;
   border-radius:20px;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(240,213,138,.2);
+  background:var(--card2);
+  border:1px solid rgba(255,255,255,.06);
   margin-bottom:14px;
 }
-.welcome b{color:var(--gold)}
-.welcome p{margin:0;color:var(--muted);font-size:13px}
+.welcome b{
+  color:var(--gold);
+  font-family:"Playfair Display",serif;
+}
+.welcome p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.45;
+}
 
 .grid{display:grid;gap:12px}
 
@@ -111,29 +124,30 @@ h1{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  border:1px solid rgba(240,213,138,.25);
-  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(180deg,var(--card2),var(--card));
   transition:all .2s ease;
   position:relative;
   overflow:hidden;
+  box-shadow:0 14px 40px rgba(0,0,0,.6);
 }
 
 .btn:active{
   transform:scale(.97);
+  border-color:var(--gold-soft);
 }
 
-/* Effet shimmer */
 .btn::after{
   content:"";
   position:absolute;
   inset:-40% -60%;
   background:linear-gradient(90deg,
     transparent,
-    rgba(240,213,138,.2),
-    rgba(240,213,138,.4),
+    rgba(212,175,55,.18),
+    rgba(212,175,55,.35),
     transparent);
   transform:rotate(12deg) translateX(-30%);
-  opacity:.5;
+  opacity:.4;
   pointer-events:none;
 }
 
@@ -141,7 +155,7 @@ h1{
   font-size:11px;
   letter-spacing:.25em;
   text-transform:uppercase;
-  color:rgba(245,247,255,.6);
+  color:rgba(242,242,242,.6);
 }
 .label{
   margin-top:6px;
@@ -151,15 +165,16 @@ h1{
 .hint{
   margin-top:6px;
   font-size:12.5px;
-  color:rgba(245,247,255,.7);
+  color:rgba(242,242,242,.7);
 }
 
 .icon{
-  width:46px;height:46px;
-  border-radius:16px;
+  width:48px;height:48px;
+  border-radius:18px;
   display:grid;
   place-items:center;
-  border:1px solid rgba(240,213,138,.3);
+  border:1px solid var(--gold-soft);
+  background:#111317;
 }
 .icon svg{
   width:22px;height:22px;
@@ -172,7 +187,7 @@ h1{
   padding:12px 14px 16px;
   text-align:center;
   font-size:12px;
-  color:rgba(245,247,255,.55);
+  color:rgba(242,242,242,.5);
 }
 </style>
 </head>
@@ -202,7 +217,6 @@ h1{
 
       <div class="grid">
 
-        <!-- MENU RAMADAN -->
         <a class="btn nav-link" href="https://ramadan-greycorner.pages.dev/">
           <div>
             <div class="tag">Menu</div>
@@ -216,7 +230,6 @@ h1{
           </div>
         </a>
 
-        <!-- MENU PRINCIPAL -->
         <a class="btn nav-link" href="https://greycornerfes.pages.dev/">
           <div>
             <div class="tag">Menu</div>
@@ -226,7 +239,7 @@ h1{
           <div class="icon">
             <svg viewBox="0 0 24 24">
               <path d="M7 8h10v6a5 5 0 0 1-5 5H7V8Z"/>
-              <path d="M17 9h2a3 3 0 0 1 0 6h-2"/>
+              <path d="M17 9h2a3 3 0 1 1 0 6h-2"/>
             </svg>
           </div>
         </a>
