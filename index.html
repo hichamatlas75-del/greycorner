@@ -12,11 +12,7 @@
   --bg1:#07080c;
   --bg2:#0b0f16;
 
-  --surface: rgba(255,255,255,.06);
-  --stroke: rgba(255,255,255,.10);
-
   --gold:#d4af37;
-  --gold2:#b8902e;
   --gold-soft: rgba(212,175,55,.18);
 
   --text:#f5f6f8;
@@ -26,7 +22,6 @@
   --shadow: 0 30px 110px rgba(0,0,0,.78);
 }
 
-/* Base */
 *{box-sizing:border-box}
 html{height:100%}
 body{
@@ -44,13 +39,12 @@ body{
   overflow-x:hidden;
 }
 
-/* Subtle load animation */
 @keyframes fadeUp{
   from{opacity:0; transform:translateY(10px)}
   to{opacity:1; transform:translateY(0)}
 }
 @keyframes shimmer{
-  0%{transform:translateX(-60%) rotate(10deg); opacity:.0}
+  0%{transform:translateX(-60%) rotate(10deg); opacity:0}
   35%{opacity:.45}
   100%{transform:translateX(60%) rotate(10deg); opacity:0}
 }
@@ -94,17 +88,16 @@ body{
   padding:18px 16px 16px;
 }
 
-/* Top row */
 .top{
   display:flex;
   gap:12px;
   align-items:center;
 }
 
-/* ✅ Square logo (non arrondi) */
+/* Square logo */
 .logo{
   width:70px;height:70px;
-  border-radius:8px;            /* carré premium (léger rayon) */
+  border-radius:8px;
   overflow:hidden;
   background:rgba(0,0,0,.35);
   border:1px solid rgba(212,175,55,.32);
@@ -131,30 +124,6 @@ body{
   line-height:1.35;
 }
 
-/* Badges */
-.badges{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:12px;
-}
-.badge{
-  display:inline-flex;
-  gap:8px;
-  align-items:center;
-  padding:8px 10px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.05);
-  color:rgba(245,246,248,.86);
-  font-size:12px;
-}
-.dot{
-  width:8px;height:8px;border-radius:99px;
-  background:rgba(212,175,55,.90);
-  box-shadow:0 0 0 4px rgba(212,175,55,.16);
-}
-
 /* Welcome panel */
 .panel{
   margin-top:14px;
@@ -177,7 +146,7 @@ body{
     rgba(212,175,55,.22),
     transparent);
   transform:rotate(10deg) translateX(-60%);
-  opacity:.0;
+  opacity:0;
   pointer-events:none;
   animation:shimmer 1.2s ease .35s both;
 }
@@ -195,7 +164,7 @@ body{
   line-height:1.55;
 }
 
-/* Actions (Call / Maps) */
+/* Actions */
 .actions{
   display:flex;
   gap:10px;
@@ -212,9 +181,7 @@ body{
   font-size:13px;
   font-weight:800;
   text-align:center;
-  position:relative;
-  overflow:hidden;
-  transition:transform .18s ease, border-color .18s ease, filter .18s ease;
+  transition:transform .18s ease, border-color .18s ease;
 }
 .small:active{ transform:scale(.98); border-color:rgba(212,175,55,.35); }
 
@@ -225,7 +192,6 @@ body{
   opacity:.45;
 }
 
-/* Menu buttons */
 .grid{
   display:grid;
   gap:12px;
@@ -233,6 +199,7 @@ body{
   animation-delay:.08s;
 }
 
+/* ✅ Fix buttons not clickable: ensure overlays don't capture taps */
 .btn{
   -webkit-tap-highlight-color: transparent;
   text-decoration:none;
@@ -250,6 +217,7 @@ body{
   position:relative;
   overflow:hidden;
   transition:transform .18s ease, border-color .18s ease, filter .18s ease;
+  cursor:pointer;
 }
 
 .btn::after{
@@ -262,8 +230,8 @@ body{
     rgba(212,175,55,.28),
     transparent);
   transform:rotate(10deg) translateX(-60%);
-  opacity:.0;
-  pointer-events:none;
+  opacity:0;
+  pointer-events:none; /* ✅ important */
 }
 
 .btn:hover{ filter:brightness(1.03) }
@@ -311,7 +279,6 @@ body{
   color:rgba(245,246,248,.55);
 }
 
-/* Small screens */
 @media (max-width:360px){
   .brand h1{font-size:22px}
   .logo{width:64px;height:64px}
@@ -334,12 +301,6 @@ body{
         <div class="brand">
           <h1>Grey Corner • Fès</h1>
           <div class="meta">Café • Restaurant • Expérience 5★</div>
-
-          <div class="badges">
-            <span class="badge"><span class="dot"></span> Sur place</span>
-            <span class="badge"><span class="dot"></span> À emporter</span>
-            <span class="badge"><span class="dot"></span> Wi-Fi</span>
-          </div>
         </div>
       </div>
 
@@ -379,7 +340,7 @@ body{
             <div class="d">Café, boissons, snacks & plats</div>
           </div>
           <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M7 8h10v6a5 5 0 0 1-5 5H7V8Z"/>
               <path d="M17 9h2a3 3 0 1 1 0 6h-2"/>
             </svg>
