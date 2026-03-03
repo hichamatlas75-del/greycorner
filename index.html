@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0" />
 <title>Grey Corner • Accueil</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,14 +11,20 @@
 :root{
   --bg1:#111315;
   --bg2:#1a1d21;
+
   --card:#22262c;
   --card2:#2a2f36;
+
   --stroke:rgba(255,255,255,.08);
+
   --gold:#c7a44a;
   --gold-soft:rgba(199,164,74,.18);
+
   --text:#f2f2f2;
   --muted:rgba(242,242,242,.65);
+
   --radius:26px;
+  --shadow:0 24px 80px rgba(0,0,0,.65);
 }
 
 *{box-sizing:border-box}
@@ -35,38 +41,58 @@ body{
   padding:20px 12px;
 }
 
+/* Subtle intro */
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(10px)}
+  to{opacity:1; transform:translateY(0)}
+}
+/* Menu attention pulse (very subtle) */
+@keyframes glowPulse{
+  0%,100%{ box-shadow:0 14px 40px rgba(0,0,0,.55) }
+  50%{ box-shadow:0 18px 58px rgba(199,164,74,.12), 0 14px 40px rgba(0,0,0,.55) }
+}
+/* Small shine sweep */
+@keyframes sweep{
+  0%{ transform:translateX(-70%) rotate(10deg); opacity:0 }
+  30%{ opacity:.35 }
+  100%{ transform:translateX(70%) rotate(10deg); opacity:0 }
+}
+
 .wrap{width:min(720px,100%)}
 
 .hero{
   border-radius:30px;
   background:linear-gradient(180deg,var(--card),var(--card2));
   border:1px solid var(--stroke);
-  box-shadow:0 24px 80px rgba(0,0,0,.65);
+  box-shadow:var(--shadow);
   padding:20px 16px;
   position:relative;
+  animation:fadeUp .42s ease both;
 }
 
-/* 🔹 Language Button */
+/* Language (top right) */
 .lang{
   position:absolute;
-  top:18px;
-  right:18px;
-  font-size:12px;
+  top:14px;
+  right:14px;
   display:flex;
-  gap:6px;
+  gap:8px;
+  z-index:2;
 }
 .lang button{
-  background:#2b3036;
-  border:1px solid var(--stroke);
-  color:var(--text);
-  padding:4px 8px;
-  border-radius:10px;
+  background:rgba(0,0,0,.18);
+  border:1px solid rgba(255,255,255,.10);
+  color:rgba(242,242,242,.85);
+  padding:6px 10px;
+  border-radius:999px;
   cursor:pointer;
-  font-weight:600;
+  font-weight:800;
+  font-size:12px;
 }
 .lang button.active{
-  border-color:var(--gold);
+  border-color:rgba(199,164,74,.55);
   color:var(--gold);
+  background:rgba(199,164,74,.10);
 }
 
 /* Header */
@@ -74,6 +100,7 @@ body{
   display:flex;
   gap:14px;
   align-items:center;
+  padding-right:92px; /* avoid overlap with lang */
 }
 
 .logo{
@@ -81,14 +108,17 @@ body{
   border-radius:10px;
   overflow:hidden;
   border:1px solid var(--gold-soft);
+  box-shadow:0 10px 25px rgba(0,0,0,.5);
   background:#111;
+  flex:0 0 auto;
 }
-.logo img{width:100%;height:100%;object-fit:cover;}
+.logo img{width:100%;height:100%;object-fit:cover;display:block;}
 
 .brand h1{
   margin:0;
   font-family:"Playfair Display",serif;
-  font-size:26px;
+  font-size:28px;
+  letter-spacing:.3px;
 }
 .brand .meta{
   margin-top:6px;
@@ -103,37 +133,64 @@ body{
   border-radius:22px;
   background:#1f2328;
   border:1px solid var(--stroke);
+  position:relative;
 }
-.panel h2{margin:0 0 8px;font-family:"Playfair Display",serif;}
-.panel p{margin:0;font-size:14px;color:var(--muted);}
+.panel h2{
+  margin:0 0 8px;
+  font-family:"Playfair Display",serif;
+  font-size:22px;
+}
+.panel p{
+  margin:0;
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.55;
+}
 
-.actions{
+/* Discreet icons row (phone / maps) */
+.iconRow{
   display:flex;
   gap:10px;
   margin-top:14px;
 }
-.small{
-  flex:1;
-  text-align:center;
-  padding:12px;
-  border-radius:18px;
+.iconBtn{
+  width:44px;height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
   text-decoration:none;
-  font-weight:600;
-  color:var(--text);
-  background:#2b3036;
-  border:1px solid var(--stroke);
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.06);
+  transition:transform .18s ease, border-color .18s ease, filter .18s ease;
+}
+.iconBtn svg{
+  width:20px;height:20px;
+  stroke:rgba(242,242,242,.88);
+  stroke-width:2;
+  fill:none;
+}
+.iconBtn:active{ transform:scale(.96); border-color:rgba(199,164,74,.45); }
+.iconBtn.gold svg{ stroke:var(--gold); }
+.iconHint{
+  flex:1;
+  align-self:center;
+  font-size:12.5px;
+  color:rgba(242,242,242,.55);
+  line-height:1.35;
 }
 
+/* Divider */
 .divider{
   height:1px;
-  margin:22px 0;
+  margin:22px 0 16px;
   background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  opacity:.5;
+  opacity:.45;
 }
 
-/* Menu buttons */
+/* Menu buttons (highlighted) */
 .grid{display:grid;gap:14px}
 
+/* ✅ Menu cards “stand out” + subtle animation */
 .btn{
   text-decoration:none;
   color:var(--text);
@@ -142,32 +199,77 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  background:linear-gradient(180deg,#24282e,#1c2025);
-  border:1px solid var(--stroke);
+  background:
+    radial-gradient(700px 260px at 20% 0%, rgba(199,164,74,.16), transparent 60%),
+    linear-gradient(180deg,#2a2f36,#1c2025);
+  border:1px solid rgba(199,164,74,.18);
+  box-shadow:0 16px 54px rgba(0,0,0,.62);
+  transition:transform .18s ease, border-color .18s ease, filter .18s ease;
+  position:relative;
+  overflow:hidden;
+  animation:glowPulse 3.2s ease-in-out infinite;
 }
+.btn::after{
+  content:"";
+  position:absolute;
+  inset:-45% -70%;
+  background:linear-gradient(90deg, transparent, rgba(199,164,74,.10), rgba(199,164,74,.22), transparent);
+  transform:translateX(-70%) rotate(10deg);
+  opacity:0;
+  pointer-events:none;
+}
+.btn:nth-child(1)::after{ animation:sweep 3.2s ease 1.0s infinite; }
+.btn:nth-child(2)::after{ animation:sweep 3.2s ease 1.8s infinite; }
+
+.btn:active{ transform:scale(.97); border-color:rgba(199,164,74,.55); filter:brightness(1.03); }
 
 .btn .k{
   font-size:11px;
-  letter-spacing:.25em;
+  letter-spacing:.28em;
   text-transform:uppercase;
-  color:var(--muted);
+  color:rgba(242,242,242,.58);
 }
 .btn .t{
-  font-size:20px;
-  font-weight:800;
+  font-size:22px;
+  font-weight:900;
   margin-top:6px;
 }
 .btn .d{
-  font-size:13px;
-  color:var(--muted);
+  font-size:13.5px;
+  color:rgba(242,242,242,.68);
   margin-top:6px;
+}
+
+.menuIcon{
+  width:58px;height:58px;
+  border-radius:18px;
+  display:grid;
+  place-items:center;
+  background:rgba(0,0,0,.22);
+  border:1px solid rgba(199,164,74,.22);
+  flex:0 0 auto;
+}
+.menuIcon svg{
+  width:24px;height:24px;
+  stroke:var(--gold);
+  stroke-width:2;
+  fill:none;
 }
 
 .footer{
   text-align:center;
-  margin-top:26px;
+  margin-top:22px;
   font-size:12px;
   color:rgba(255,255,255,.45);
+}
+
+/* Small screens */
+@media (max-width:360px){
+  .brand h1{font-size:24px}
+  .logo{width:66px;height:66px}
+  .btn{padding:16px}
+  .btn .t{font-size:20px}
+  .top{padding-right:86px}
 }
 </style>
 </head>
@@ -176,10 +278,9 @@ body{
 <div class="wrap">
   <div class="hero">
 
-    <!-- Language -->
     <div class="lang">
-      <button id="frBtn" class="active">FR</button>
-      <button id="enBtn">EN</button>
+      <button id="frBtn" class="active" type="button">FR</button>
+      <button id="enBtn" type="button">EN</button>
     </div>
 
     <div class="top">
@@ -187,7 +288,8 @@ body{
         <img src="images/logo.png" alt="Grey Corner Logo">
       </div>
       <div class="brand">
-        <h1 id="title">Grey Corner • Fès</h1>
+        <!-- ✅ removed “Fès” -->
+        <h1 id="title">Grey Corner</h1>
         <div class="meta" id="subtitle">Café • Restaurant • Expérience élégante</div>
       </div>
     </div>
@@ -195,38 +297,62 @@ body{
     <div class="panel">
       <h2 id="welcomeTitle">Bienvenue</h2>
       <p id="welcomeText">
-        Découvrez Grey Corner : café de qualité, boissons signatures,
-        snacks et plats soigneusement préparés.
+        Découvrez Grey Corner : café de qualité, boissons signatures, snacks et plats soigneusement préparés.
       </p>
 
-      <div class="actions">
-        <a class="small" id="phoneBtn" href="tel:+212535940168">Téléphone</a>
-        <a class="small" id="mapBtn" href="https://maps.app.goo.gl/sU7eWJS3Eq6nn5736" target="_blank">Itinéraire</a>
+      <!-- ✅ Discreet icons instead of big buttons -->
+      <div class="iconRow">
+        <a class="iconBtn gold" id="phoneBtn" href="tel:+212535940168" aria-label="Téléphone" title="Téléphone">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1A19.5 19.5 0 0 1 5.2 13 19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.8.3 1.6.6 2.4a2 2 0 0 1-.5 2.1L8 9.4a16 16 0 0 0 6.6 6.6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.4.6a2 2 0 0 1 1.7 2Z"/>
+          </svg>
+        </a>
+
+        <a class="iconBtn" id="mapBtn" href="https://maps.app.goo.gl/sU7eWJS3Eq6nn5736" target="_blank" rel="noopener"
+           aria-label="Itinéraire" title="Itinéraire">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21s7-4.4 7-11a7 7 0 1 0-14 0c0 6.6 7 11 7 11Z"/>
+            <path d="M12 10.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+          </svg>
+        </a>
+
+        <div class="iconHint" id="hintText">Menus ci-dessous • Scan & choisissez</div>
       </div>
     </div>
 
     <div class="divider"></div>
 
+    <!-- ✅ Menus highlighted + subtle animation -->
     <div class="grid">
-      <a class="btn" href="https://ramadan-greycorner.pages.dev/" target="_blank">
+      <a class="btn" href="https://ramadan-greycorner.pages.dev/" target="_blank" rel="noopener">
         <div>
           <div class="k" id="menuLabel1">Menu</div>
           <div class="t">Ramadan</div>
           <div class="d" id="desc1">Formules Ftour & offres spéciales</div>
         </div>
+        <div class="menuIcon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 12.6A8.5 8.5 0 1 1 11.4 3a6.5 6.5 0 1 0 9.6 9.6Z"/>
+          </svg>
+        </div>
       </a>
 
-      <a class="btn" href="https://greycornerfes.pages.dev/" target="_blank">
+      <a class="btn" href="https://greycornerfes.pages.dev/" target="_blank" rel="noopener">
         <div>
           <div class="k" id="menuLabel2">Menu</div>
           <div class="t" id="mainMenu">Menu Principal</div>
           <div class="d" id="desc2">Café, boissons, snacks & plats</div>
         </div>
+        <div class="menuIcon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M7 8h10v6a5 5 0 0 1-5 5H7V8Z"/>
+            <path d="M17 9h2a3 3 0 1 1 0 6h-2"/>
+          </svg>
+        </div>
       </a>
     </div>
 
-    <div class="footer">© Grey Corner — Fès</div>
-
+    <div class="footer">© Grey Corner</div>
   </div>
 </div>
 
@@ -234,50 +360,46 @@ body{
 const frBtn = document.getElementById("frBtn");
 const enBtn = document.getElementById("enBtn");
 
-const translations = {
-  fr: {
+const t = {
+  fr:{
     subtitle:"Café • Restaurant • Expérience élégante",
     welcomeTitle:"Bienvenue",
     welcomeText:"Découvrez Grey Corner : café de qualité, boissons signatures, snacks et plats soigneusement préparés.",
-    phone:"Téléphone",
-    map:"Itinéraire",
+    hint:"Menus ci-dessous • Scan & choisissez",
     menu:"Menu",
-    mainMenu:"Menu Principal",
-    desc1:"Formules Ftour & offres spéciales",
-    desc2:"Café, boissons, snacks & plats"
+    main:"Menu Principal",
+    d1:"Formules Ftour & offres spéciales",
+    d2:"Café, boissons, snacks & plats"
   },
-  en: {
+  en:{
     subtitle:"Coffee • Restaurant • Elegant Experience",
     welcomeTitle:"Welcome",
     welcomeText:"Discover Grey Corner: quality coffee, signature drinks, snacks and carefully prepared dishes.",
-    phone:"Call",
-    map:"Directions",
+    hint:"Menus below • Scan & choose",
     menu:"Menu",
-    mainMenu:"Main Menu",
-    desc1:"Ftour formulas & special offers",
-    desc2:"Coffee, drinks, snacks & dishes"
+    main:"Main Menu",
+    d1:"Ftour formulas & special offers",
+    d2:"Coffee, drinks, snacks & dishes"
   }
 };
 
 function setLang(lang){
-  const t = translations[lang];
-  document.getElementById("subtitle").textContent = t.subtitle;
-  document.getElementById("welcomeTitle").textContent = t.welcomeTitle;
-  document.getElementById("welcomeText").textContent = t.welcomeText;
-  document.getElementById("phoneBtn").textContent = t.phone;
-  document.getElementById("mapBtn").textContent = t.map;
-  document.getElementById("menuLabel1").textContent = t.menu;
-  document.getElementById("menuLabel2").textContent = t.menu;
-  document.getElementById("mainMenu").textContent = t.mainMenu;
-  document.getElementById("desc1").textContent = t.desc1;
-  document.getElementById("desc2").textContent = t.desc2;
+  document.getElementById("subtitle").textContent = t[lang].subtitle;
+  document.getElementById("welcomeTitle").textContent = t[lang].welcomeTitle;
+  document.getElementById("welcomeText").textContent = t[lang].welcomeText;
+  document.getElementById("hintText").textContent = t[lang].hint;
+  document.getElementById("menuLabel1").textContent = t[lang].menu;
+  document.getElementById("menuLabel2").textContent = t[lang].menu;
+  document.getElementById("mainMenu").textContent = t[lang].main;
+  document.getElementById("desc1").textContent = t[lang].d1;
+  document.getElementById("desc2").textContent = t[lang].d2;
 
   frBtn.classList.toggle("active", lang==="fr");
   enBtn.classList.toggle("active", lang==="en");
 }
 
-frBtn.onclick = () => setLang("fr");
-enBtn.onclick = () => setLang("en");
+frBtn.addEventListener("click", ()=>setLang("fr"));
+enBtn.addEventListener("click", ()=>setLang("en"));
 </script>
 
 </body>
