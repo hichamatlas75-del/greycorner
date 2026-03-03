@@ -25,9 +25,10 @@
 }
 
 *{box-sizing:border-box}
-html,body{height:100%}
+html{height:100%}
 body{
   margin:0;
+  min-height:100vh;
   font-family:"Poppins",sans-serif;
   color:var(--text);
   background:
@@ -37,10 +38,9 @@ body{
   align-items:center;
   justify-content:center;
   padding:18px 12px;
-  transition:opacity .35s ease, transform .35s ease;
+  overflow-x:hidden;
+  overflow-y:auto;
 }
-
-body.fade-out{ opacity:0; transform:scale(.98); }
 
 .wrap{width:min(560px,100%)}
 
@@ -67,6 +67,7 @@ body.fade-out{ opacity:0; transform:scale(.98); }
   border:1px solid var(--gold-soft);
   box-shadow:0 10px 25px rgba(0,0,0,.5);
   background:#111317;
+  flex:0 0 auto;
 }
 .logo img{
   width:100%;
@@ -126,10 +127,11 @@ h1{
   align-items:center;
   border:1px solid rgba(255,255,255,.08);
   background:linear-gradient(180deg,var(--card2),var(--card));
-  transition:all .2s ease;
+  transition:transform .18s ease, border-color .18s ease, filter .18s ease;
   position:relative;
   overflow:hidden;
   box-shadow:0 14px 40px rgba(0,0,0,.6);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn:active{
@@ -175,6 +177,7 @@ h1{
   place-items:center;
   border:1px solid var(--gold-soft);
   background:#111317;
+  flex:0 0 auto;
 }
 .icon svg{
   width:22px;height:22px;
@@ -189,12 +192,80 @@ h1{
   font-size:12px;
   color:rgba(242,242,242,.5);
 }
+
+/* ====== VIEW (menu in-page) ====== */
+.menu-view{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  display:none;            /* shown via JS */
+  flex-direction:column;
+  z-index:999;
+  opacity:0;
+  transform:translateX(14px);
+  transition:opacity .22s ease, transform .22s ease;
+}
+.menu-view.show{
+  display:flex;
+}
+.menu-view.on{
+  opacity:1;
+  transform:translateX(0);
+}
+
+.menu-bar{
+  padding:12px 12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:rgba(10,12,16,.85);
+  backdrop-filter: blur(10px);
+}
+
+.back-btn{
+  appearance:none;
+  border:1px solid rgba(212,175,55,.45);
+  background:rgba(212,175,55,.08);
+  color:var(--gold);
+  padding:10px 14px;
+  border-radius:14px;
+  font-weight:700;
+  font-family:"Poppins",sans-serif;
+  cursor:pointer;
+}
+
+.bar-title{
+  font-weight:700;
+  letter-spacing:.2px;
+  color:var(--text);
+  font-size:14px;
+  opacity:.95;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.frame{
+  flex:1;
+  width:100%;
+  border:0;
+  background:#0a0c10;
+}
+
+/* Mobile tightening */
+@media (max-width:360px){
+  h1{font-size:20px}
+  .logo{width:56px;height:56px;border-radius:18px}
+  .btn{padding:14px;border-radius:20px}
+  .label{font-size:17px}
+}
 </style>
 </head>
 
 <body>
 
-<div class="wrap">
+<div class="wrap" id="homeWrap">
   <div class="card">
 
     <div class="top">
@@ -210,56 +281,108 @@ h1{
     <div class="divider"></div>
 
     <div class="content">
-
       <div class="welcome">
         <p><b>Bienvenue</b><br>Accès direct aux menus officiels Grey Corner.</p>
       </div>
 
       <div class="grid">
-
-        <a class="btn nav-link" href="https://ramadan-greycorner.pages.dev/">
+        <a class="btn nav-link" href="https://ramadan-greycorner.pages.dev/" data-title="Menu Ramadan">
           <div>
             <div class="tag">Menu</div>
             <div class="label">Ramadan</div>
             <div class="hint">Formules Ftour & Offres spéciales</div>
           </div>
           <div class="icon">
-            <svg viewBox="0 0 24 24">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M21 12.6A8.5 8.5 0 1 1 11.4 3a6.5 6.5 0 1 0 9.6 9.6Z"/>
             </svg>
           </div>
         </a>
 
-        <a class="btn nav-link" href="https://greycornerfes.pages.dev/">
+        <a class="btn nav-link" href="https://greycornerfes.pages.dev/" data-title="Menu Principal">
           <div>
             <div class="tag">Menu</div>
             <div class="label">Menu Principal</div>
             <div class="hint">Café, boissons, snacks & plats</div>
           </div>
           <div class="icon">
-            <svg viewBox="0 0 24 24">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M7 8h10v6a5 5 0 0 1-5 5H7V8Z"/>
               <path d="M17 9h2a3 3 0 1 1 0 6h-2"/>
             </svg>
           </div>
         </a>
-
       </div>
     </div>
 
     <div class="foot">© Grey Corner</div>
-
   </div>
 </div>
 
+<!-- ===== In-page Menu Viewer (iframe) ===== -->
+<div class="menu-view" id="menuView" aria-hidden="true">
+  <div class="menu-bar">
+    <button class="back-btn" id="backBtn" type="button">← Retour</button>
+    <div class="bar-title" id="barTitle">Menu</div>
+  </div>
+  <iframe class="frame" id="menuFrame" title="Menu Grey Corner"></iframe>
+</div>
+
 <script>
-document.querySelectorAll('.nav-link').forEach(link=>{
-  link.addEventListener('click', function(e){
+const links = document.querySelectorAll('.nav-link');
+const menuView = document.getElementById('menuView');
+const frame = document.getElementById('menuFrame');
+const backBtn = document.getElementById('backBtn');
+const barTitle = document.getElementById('barTitle');
+
+let menuOpen = false;
+
+function openMenu(url, title){
+  // show overlay
+  menuView.classList.add('show');
+  requestAnimationFrame(()=> menuView.classList.add('on'));
+
+  // load
+  frame.src = url;
+  barTitle.textContent = title || "Menu";
+
+  // push state so Android back works
+  if (!menuOpen) {
+    history.pushState({menu:true}, "", "#menu");
+  }
+  menuOpen = true;
+  menuView.setAttribute("aria-hidden","false");
+}
+
+function closeMenu(fromPopstate=false){
+  // animate out
+  menuView.classList.remove('on');
+  menuView.setAttribute("aria-hidden","true");
+
+  setTimeout(()=>{
+    menuView.classList.remove('show');
+    frame.src = "about:blank";
+  }, 220);
+
+  if (menuOpen && !fromPopstate) history.back();
+  menuOpen = false;
+}
+
+links.forEach(link=>{
+  link.addEventListener('click', (e)=>{
+    // allow new tab / special clicks
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+
     e.preventDefault();
-    document.body.classList.add('fade-out');
-    const url = this.href;
-    setTimeout(()=>{ window.location.href = url; }, 350);
+    openMenu(link.href, link.dataset.title);
   });
+});
+
+backBtn.addEventListener('click', ()=> closeMenu(false));
+
+// If user presses Android back or browser back
+window.addEventListener('popstate', (e)=>{
+  if (menuOpen) closeMenu(true);
 });
 </script>
 
