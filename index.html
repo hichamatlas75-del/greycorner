@@ -9,23 +9,16 @@
 
 <style>
 :root{
-  /* 🎯 Gris / Noir Café */
   --bg1:#111315;
   --bg2:#1a1d21;
-
   --card:#22262c;
   --card2:#2a2f36;
-
   --stroke:rgba(255,255,255,.08);
-
   --gold:#c7a44a;
   --gold-soft:rgba(199,164,74,.18);
-
   --text:#f2f2f2;
   --muted:rgba(242,242,242,.65);
-
   --radius:26px;
-  --shadow:0 24px 80px rgba(0,0,0,.65);
 }
 
 *{box-sizing:border-box}
@@ -42,21 +35,38 @@ body{
   padding:20px 12px;
 }
 
-/* Animation douce */
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(8px)}
-  to{opacity:1; transform:translateY(0)}
-}
-
 .wrap{width:min(720px,100%)}
 
 .hero{
   border-radius:30px;
   background:linear-gradient(180deg,var(--card),var(--card2));
   border:1px solid var(--stroke);
-  box-shadow:var(--shadow);
+  box-shadow:0 24px 80px rgba(0,0,0,.65);
   padding:20px 16px;
-  animation:fadeUp .4s ease both;
+  position:relative;
+}
+
+/* 🔹 Language Button */
+.lang{
+  position:absolute;
+  top:18px;
+  right:18px;
+  font-size:12px;
+  display:flex;
+  gap:6px;
+}
+.lang button{
+  background:#2b3036;
+  border:1px solid var(--stroke);
+  color:var(--text);
+  padding:4px 8px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+}
+.lang button.active{
+  border-color:var(--gold);
+  color:var(--gold);
 }
 
 /* Header */
@@ -71,19 +81,14 @@ body{
   border-radius:10px;
   overflow:hidden;
   border:1px solid var(--gold-soft);
-  box-shadow:0 10px 25px rgba(0,0,0,.5);
   background:#111;
 }
-.logo img{
-  width:100%;height:100%;
-  object-fit:cover;
-}
+.logo img{width:100%;height:100%;object-fit:cover;}
 
 .brand h1{
   margin:0;
   font-family:"Playfair Display",serif;
   font-size:26px;
-  letter-spacing:.4px;
 }
 .brand .meta{
   margin-top:6px;
@@ -99,23 +104,14 @@ body{
   background:#1f2328;
   border:1px solid var(--stroke);
 }
-.panel h2{
-  margin:0 0 8px;
-  font-family:"Playfair Display",serif;
-}
-.panel p{
-  margin:0;
-  font-size:14px;
-  color:var(--muted);
-  line-height:1.5;
-}
+.panel h2{margin:0 0 8px;font-family:"Playfair Display",serif;}
+.panel p{margin:0;font-size:14px;color:var(--muted);}
 
 .actions{
   display:flex;
   gap:10px;
   margin-top:14px;
 }
-
 .small{
   flex:1;
   text-align:center;
@@ -126,14 +122,8 @@ body{
   color:var(--text);
   background:#2b3036;
   border:1px solid var(--stroke);
-  transition:.2s;
-}
-.small:active{
-  transform:scale(.97);
-  border-color:var(--gold);
 }
 
-/* Divider */
 .divider{
   height:1px;
   margin:22px 0;
@@ -154,12 +144,6 @@ body{
   align-items:center;
   background:linear-gradient(180deg,#24282e,#1c2025);
   border:1px solid var(--stroke);
-  box-shadow:0 14px 40px rgba(0,0,0,.6);
-  transition:.2s;
-}
-.btn:active{
-  transform:scale(.97);
-  border-color:var(--gold);
 }
 
 .btn .k{
@@ -179,21 +163,6 @@ body{
   margin-top:6px;
 }
 
-.icon{
-  width:56px;height:56px;
-  border-radius:16px;
-  display:grid;
-  place-items:center;
-  background:#181b1f;
-  border:1px solid var(--gold-soft);
-}
-.icon svg{
-  width:22px;height:22px;
-  stroke:var(--gold);
-  stroke-width:2;
-  fill:none;
-}
-
 .footer{
   text-align:center;
   margin-top:26px;
@@ -207,26 +176,32 @@ body{
 <div class="wrap">
   <div class="hero">
 
+    <!-- Language -->
+    <div class="lang">
+      <button id="frBtn" class="active">FR</button>
+      <button id="enBtn">EN</button>
+    </div>
+
     <div class="top">
       <div class="logo">
         <img src="images/logo.png" alt="Grey Corner Logo">
       </div>
       <div class="brand">
-        <h1>Grey Corner • Fès</h1>
-        <div class="meta">Café • Restaurant • Expérience élégante</div>
+        <h1 id="title">Grey Corner • Fès</h1>
+        <div class="meta" id="subtitle">Café • Restaurant • Expérience élégante</div>
       </div>
     </div>
 
     <div class="panel">
-      <h2>Bienvenue</h2>
-      <p>
+      <h2 id="welcomeTitle">Bienvenue</h2>
+      <p id="welcomeText">
         Découvrez Grey Corner : café de qualité, boissons signatures,
         snacks et plats soigneusement préparés.
       </p>
 
       <div class="actions">
-        <a class="small" href="tel:+212535940168">Téléphone</a>
-        <a class="small" href="https://maps.app.goo.gl/sU7eWJS3Eq6nn5736" target="_blank">Itinéraire</a>
+        <a class="small" id="phoneBtn" href="tel:+212535940168">Téléphone</a>
+        <a class="small" id="mapBtn" href="https://maps.app.goo.gl/sU7eWJS3Eq6nn5736" target="_blank">Itinéraire</a>
       </div>
     </div>
 
@@ -235,28 +210,17 @@ body{
     <div class="grid">
       <a class="btn" href="https://ramadan-greycorner.pages.dev/" target="_blank">
         <div>
-          <div class="k">Menu</div>
+          <div class="k" id="menuLabel1">Menu</div>
           <div class="t">Ramadan</div>
-          <div class="d">Formules Ftour & offres spéciales</div>
-        </div>
-        <div class="icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M21 12.6A8.5 8.5 0 1 1 11.4 3a6.5 6.5 0 1 0 9.6 9.6Z"/>
-          </svg>
+          <div class="d" id="desc1">Formules Ftour & offres spéciales</div>
         </div>
       </a>
 
       <a class="btn" href="https://greycornerfes.pages.dev/" target="_blank">
         <div>
-          <div class="k">Menu</div>
-          <div class="t">Menu Principal</div>
-          <div class="d">Café, boissons, snacks & plats</div>
-        </div>
-        <div class="icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M7 8h10v6a5 5 0 0 1-5 5H7V8Z"/>
-            <path d="M17 9h2a3 3 0 1 1 0 6h-2"/>
-          </svg>
+          <div class="k" id="menuLabel2">Menu</div>
+          <div class="t" id="mainMenu">Menu Principal</div>
+          <div class="d" id="desc2">Café, boissons, snacks & plats</div>
         </div>
       </a>
     </div>
@@ -265,5 +229,56 @@ body{
 
   </div>
 </div>
+
+<script>
+const frBtn = document.getElementById("frBtn");
+const enBtn = document.getElementById("enBtn");
+
+const translations = {
+  fr: {
+    subtitle:"Café • Restaurant • Expérience élégante",
+    welcomeTitle:"Bienvenue",
+    welcomeText:"Découvrez Grey Corner : café de qualité, boissons signatures, snacks et plats soigneusement préparés.",
+    phone:"Téléphone",
+    map:"Itinéraire",
+    menu:"Menu",
+    mainMenu:"Menu Principal",
+    desc1:"Formules Ftour & offres spéciales",
+    desc2:"Café, boissons, snacks & plats"
+  },
+  en: {
+    subtitle:"Coffee • Restaurant • Elegant Experience",
+    welcomeTitle:"Welcome",
+    welcomeText:"Discover Grey Corner: quality coffee, signature drinks, snacks and carefully prepared dishes.",
+    phone:"Call",
+    map:"Directions",
+    menu:"Menu",
+    mainMenu:"Main Menu",
+    desc1:"Ftour formulas & special offers",
+    desc2:"Coffee, drinks, snacks & dishes"
+  }
+};
+
+function setLang(lang){
+  const t = translations[lang];
+  document.getElementById("subtitle").textContent = t.subtitle;
+  document.getElementById("welcomeTitle").textContent = t.welcomeTitle;
+  document.getElementById("welcomeText").textContent = t.welcomeText;
+  document.getElementById("phoneBtn").textContent = t.phone;
+  document.getElementById("mapBtn").textContent = t.map;
+  document.getElementById("menuLabel1").textContent = t.menu;
+  document.getElementById("menuLabel2").textContent = t.menu;
+  document.getElementById("mainMenu").textContent = t.mainMenu;
+  document.getElementById("desc1").textContent = t.desc1;
+  document.getElementById("desc2").textContent = t.desc2;
+
+  frBtn.classList.toggle("active", lang==="fr");
+  enBtn.classList.toggle("active", lang==="en");
+}
+
+frBtn.onclick = () => setLang("fr");
+enBtn.onclick = () => setLang("en");
+</script>
+
 </body>
 </html>
