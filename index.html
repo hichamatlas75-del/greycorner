@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>Grey Corner • Menus</title>
+
+<!-- Polices de caractères Premium -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* Palette Midnight Gold */
+  --bg-dark: #0a090b;
+  --bg-gradient-1: #161210;
+  --bg-gradient-2: #050404;
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(26, 22, 20, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-highlight: rgba(212, 175, 55, 0.12);
+  
+  /* Or Premium */
+  --gold-primary: #D4AF37;
+  --gold-light: #F3E5AB;
+  --gold-dark: #AA8825;
+  
+  /* Textes */
+  --text-main: #F8F9FA;
+  --text-muted: #9E9993;
+  
+  /* Arrondis */
+  --radius-lg: 32px;
+  --radius-md: 24px;
+  --radius-sm: 16px;
+  
+  /* Transitions Fluiides */
+  --transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-dark);
+  /* Dégradés d'arrière-plan très subtils */
+  background-image: 
+    radial-gradient(circle at 15% 0%, var(--glass-highlight) 0%, transparent 45%),
+    radial-gradient(circle at 85% 100%, rgba(212, 175, 55, 0.05) 0%, transparent 45%),
+    linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  overflow-x: hidden;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+body.fade-out {
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+/* Animations d'entrée */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.15); }
+  50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.35); }
+  100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.15); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Conteneur principal */
+.wrap {
+  width: min(560px, 100%);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Carte centrale Glassmorphism */
+.main-card {
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 
+    0 40px 80px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* Bruit de fond subtil (texture) sur la carte */
+.main-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* En-tête */
+.header {
+  padding: 36px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+/* Logo animé et auréolé */
+.logo-container {
+  width: 88px;
+  height: 88px;
+  border-radius: 28px;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--gold-primary), transparent 60%);
+  margin-bottom: 22px;
+  animation: float 6s ease-in-out infinite;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  border-radius: 26px;
+  overflow: hidden;
+  background: var(--bg-gradient-2);
+  display: grid;
+  place-items: center;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.logo-container:hover .logo img {
+  transform: scale(1.08);
+}
+
+/* Typographie principale */
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+  margin-bottom: 6px;
+  background: linear-gradient(to right, #ffffff, var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.content-area {
+  padding: 0 24px 32px;
+}
+
+/* Message de bienvenue repensé */
+.welcome-box {
+  padding: 20px 24px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.welcome-box b {
+  color: var(--gold-primary);
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.welcome-box p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Grille des boutons */
+.menu-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Style des cartes "Bouton" Menu */
+.menu-btn {
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+/* Effet de lueur interne au survol */
+.menu-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.06), transparent);
+  transform: translateX(-100%);
+  transition: 0.6s ease;
+}
+
+.menu-btn:hover {
+  transform: translateY(-4px) scale(1.01);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
+.menu-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.menu-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Icônes de menu */
+.icon-wrapper {
+  flex-shrink: 0;
+  width: 58px;
+  height: 58px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: grid;
+  place-items: center;
+  transition: var(--transition);
+  position: relative;
+}
+
+.menu-btn:hover .icon-wrapper {
+  border-color: var(--gold-primary);
+  background: rgba(212, 175, 55, 0.1);
+  animation: glowPulse 2s infinite;
+}
+
+.icon-wrapper svg {
+  width: 26px;
+  height: 26px;
+  stroke: var(--text-muted);
+  stroke-width: 1.5;
+  fill: none;
+  transition: var(--transition);
+}
+
+.menu-btn:hover .icon-wrapper svg {
+  stroke: var(--gold-light);
+  transform: scale(1.1);
+}
+
+/* Textes dans les boutons */
+.btn-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-primary);
+}
+
+.label {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: var(--transition);
+}
+
+.menu-btn:hover .label {
+  color: #fff;
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Icône flèche d'indication */
+.arrow-icon {
+  width: 24px;
+  height: 24px;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 2;
+  fill: none;
+  transition: var(--transition);
+  transform: translateX(-12px);
+  opacity: 0;
+}
+
+.menu-btn:hover .arrow-icon {
+  stroke: var(--gold-primary);
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Pied de page */
+.footer {
+  text-align: center;
+  padding: 0 0 26px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 1px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.footer span {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Ligne décorative au dessus du contenu */
+.deco-line {
+  height: 1px;
+  width: 50px;
+  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+  margin: 0 auto 26px;
+  opacity: 0.6;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 480px) {
+  .header { padding: 32px 20px 18px; }
+  .logo-container { width: 80px; height: 80px; margin-bottom: 18px; }
+  h1 { font-size: 28px; }
+  .content-area { padding: 0 20px 28px; }
+  .menu-btn { padding: 18px 16px; gap: 16px; }
+  .icon-wrapper { width: 50px; height: 50px; }
+  .icon-wrapper svg { width: 22px; height: 22px; }
+  .label { font-size: 18px; }
+  
+  /* Sur mobile on affiche la flèche par défaut */
+  .arrow-icon {
+    transform: translateX(0);
+    opacity: 0.5;
+    width: 20px;
+    height: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+  <div class="main-card">
+    
+    <div class="header">
+      <div class="logo-container">
+        <div class="logo">
+          <img src="images/logo.png" alt="Grey Corner Logo">
+        </div>
+      </div>
+      <h1>Grey Corner • Fès</h1>
+      <div class="subtitle">Sélectionnez un menu</div>
+    </div>
+    
+    <div class="deco-line"></div>
+
+    <div class="content-area">
+      <div class="welcome-box">
+        <b>L'Expérience Premium</b>
+        <p>Bienvenue dans l'univers Grey Corner. Accédez directement à nos menus officiels et découvrez nos sélections.</p>
+      </div>
+
+      <div class="menu-grid">
+        <a class="menu-btn nav-link" href="https://ramadan-greycorner.pages.dev/">
+          <div class="icon-wrapper">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.6A8.5 8.5 0 1 1 11.4 3a6.5 6.5 0 1 0 9.6 9.6Z"/>
+              <path d="M15 10l2 2-2 2" stroke-opacity="0" class="star-sparkle"/>
+            </svg>
+          </div>
+          <div class="btn-content">
+            <div class="tag">Édition Spéciale</div>
+            <div class="label">Menu Ramadan</div>
+            <div class="hint">Formules Ftour & Délices traditionnels</div>
+          </div>
+          <svg class="arrow-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </a>
+
+        <a class="menu-btn nav-link" href="https://menugreycorner.pages.dev/">
+          <div class="icon-wrapper">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+              <path d="M6 1v3"></path>
+              <path d="M10 1v3"></path>
+              <path d="M14 1v3"></path>
+            </svg>
+          </div>
+          <div class="btn-content">
+            <div class="tag">Menu Officiel</div>
+            <div class="label">Menu Principal</div>
+            <div class="hint">Café de spécialité, Brunch & Snacks</div>
+          </div>
+          <svg class="arrow-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      © <span>Grey Corner</span> Fès
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Prevent jumping animation issue if clicking multiple times
+let isNavigating = false;
+
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    if (isNavigating) return e.preventDefault();
+    
+    // Fallback security timeout max
+    setTimeout(() => { window.location.href = this.href; }, 800);
+    
+    e.preventDefault();
+    isNavigating = true;
+    
+    const url = this.getAttribute('href');
+    
+    // Add visual feedback to the clicked button
+    this.style.transform = 'scale(0.96)';
+    this.style.opacity = '0.8';
+    
+    // Fade out entire body
+    setTimeout(() => {
+      document.body.classList.add('fade-out');
+    }, 150);
+    
+    // Set actual navigation
+    setTimeout(() => {
+      window.location.href = url;
+    }, 600);
+  });
+});
+</script>
+
+</body>
+</html>
