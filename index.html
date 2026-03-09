@@ -475,34 +475,44 @@ h1 {
 </div>
 
 <script>
-// Prevent jumping animation issue if clicking multiple times
 let isNavigating = false;
+
+// Réinitialiser la page quand on revient dessus avec le bouton retour
+window.addEventListener('pageshow', function () {
+  isNavigating = false;
+  document.body.classList.remove('fade-out');
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.style.transform = '';
+    link.style.opacity = '';
+    link.style.pointerEvents = '';
+  });
+});
 
 document.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', function(e) {
-    if (isNavigating) return e.preventDefault();
-    
-    // Fallback security timeout max
-    setTimeout(() => { window.location.href = this.href; }, 800);
-    
     e.preventDefault();
+
+    if (isNavigating) return;
+
     isNavigating = true;
-    
-    const url = this.getAttribute('href');
-    
-    // Add visual feedback to the clicked button
+
+    const url = this.href;
+
+    // feedback visuel
     this.style.transform = 'scale(0.96)';
     this.style.opacity = '0.8';
-    
-    // Fade out entire body
+    this.style.pointerEvents = 'none';
+
+    // animation de sortie
     setTimeout(() => {
       document.body.classList.add('fade-out');
-    }, 150);
-    
-    // Set actual navigation
+    }, 120);
+
+    // navigation réelle
     setTimeout(() => {
       window.location.href = url;
-    }, 600);
+    }, 520);
   });
 });
 </script>
