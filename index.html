@@ -3,59 +3,73 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<title>Grey Corner • Menus</title>
 
-<!-- Polices de caractères Premium -->
+<!-- ================================
+     SEO & META
+================================= -->
+<title>Grey Corner Café • Fès — Menus</title>
+<meta name="description" content="Bienvenue au Grey Corner Café à Fès. Accédez à nos menus digitaux : Menu Principal et Menu Ramadan." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://greycorner-menus.pages.dev/" />
+
+<!-- Open Graph -->
+<meta property="og:type"         content="website" />
+<meta property="og:title"        content="Grey Corner Café • Fès" />
+<meta property="og:description"  content="Découvrez les menus du Grey Corner Café à Fès — Menu Principal & Menu Ramadan." />
+<meta property="og:image"        content="https://menugreycorner.pages.dev/images/og-preview.jpg" />
+<meta property="og:image:width"  content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type"   content="image/jpeg" />
+<meta property="og:url"          content="https://greycorner-menus.pages.dev/" />
+<meta property="og:site_name"    content="Grey Corner Café" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary_large_image" />
+<meta name="twitter:title"       content="Grey Corner Café • Fès" />
+<meta name="twitter:description" content="Découvrez les menus du Grey Corner Café à Fès." />
+<meta name="twitter:image"       content="https://menugreycorner.pages.dev/images/og-preview.jpg" />
+
+<!-- ================================
+     FAVICON
+================================= -->
+<link rel="icon"             type="image/png" sizes="32x32" href="images/favicon-32.png" />
+<link rel="icon"             type="image/png" sizes="16x16" href="images/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180"               href="images/apple-touch-icon.png" />
+<link rel="shortcut icon"    href="images/favicon.ico" />
+
+<!-- Polices -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  /* Palette Midnight Gold */
   --bg-dark: #0a090b;
   --bg-gradient-1: #161210;
   --bg-gradient-2: #050404;
-  
-  /* Glassmorphism */
   --glass-bg: rgba(26, 22, 20, 0.45);
   --glass-border: rgba(255, 255, 255, 0.06);
   --glass-highlight: rgba(212, 175, 55, 0.12);
-  
-  /* Or Premium */
   --gold-primary: #D4AF37;
   --gold-light: #F3E5AB;
   --gold-dark: #AA8825;
-  
-  /* Textes */
   --text-main: #F8F9FA;
   --text-muted: #9E9993;
-  
-  /* Arrondis */
   --radius-lg: 32px;
   --radius-md: 24px;
   --radius-sm: 16px;
-  
-  /* Transitions Fluiides */
   --transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
-  height: 100%;
-}
+html, body { height: 100%; }
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: var(--text-main);
   background-color: var(--bg-dark);
-  /* Dégradés d'arrière-plan très subtils */
-  background-image: 
+  background-image:
     radial-gradient(circle at 15% 0%, var(--glass-highlight) 0%, transparent 45%),
     radial-gradient(circle at 85% 100%, rgba(212, 175, 55, 0.05) 0%, transparent 45%),
     linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
@@ -72,44 +86,35 @@ body.fade-out {
   transform: translateY(15px);
 }
 
-/* Animations d'entrée */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes glowPulse {
-  0% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.15); }
-  50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.35); }
+  0%   { box-shadow: 0 0 15px rgba(212, 175, 55, 0.15); }
+  50%  { box-shadow: 0 0 25px rgba(212, 175, 55, 0.35); }
   100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.15); }
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-6px); }
   100% { transform: translateY(0px); }
 }
 
-/* Conteneur principal */
 .wrap {
   width: min(560px, 100%);
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* Carte centrale Glassmorphism */
 .main-card {
   border-radius: var(--radius-lg);
   background: var(--glass-bg);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--glass-border);
-  box-shadow: 
+  box-shadow:
     0 40px 80px rgba(0, 0, 0, 0.7),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   overflow: hidden;
@@ -117,7 +122,6 @@ body.fade-out {
   z-index: 1;
 }
 
-/* Bruit de fond subtil (texture) sur la carte */
 .main-card::before {
   content: "";
   position: absolute;
@@ -127,9 +131,37 @@ body.fade-out {
   pointer-events: none;
 }
 
-/* En-tête */
+/* Sélecteur de langue */
+.lang-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 14px 20px 0;
+}
+
+.lang-bar button {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-muted);
+  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: grid;
+  place-items: center;
+}
+
+.lang-bar button.active,
+.lang-bar button:hover {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: var(--gold-primary);
+  transform: scale(1.08);
+}
+
 .header {
-  padding: 36px 24px 20px;
+  padding: 24px 24px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,7 +169,6 @@ body.fade-out {
   position: relative;
 }
 
-/* Logo animé et auréolé */
 .logo-container {
   width: 88px;
   height: 88px;
@@ -166,11 +197,8 @@ body.fade-out {
   transition: transform 0.5s ease;
 }
 
-.logo-container:hover .logo img {
-  transform: scale(1.08);
-}
+.logo-container:hover .logo img { transform: scale(1.08); }
 
-/* Typographie principale */
 h1 {
   font-family: "Playfair Display", serif;
   font-size: 32px;
@@ -191,16 +219,13 @@ h1 {
   text-transform: uppercase;
 }
 
-.content-area {
-  padding: 0 24px 32px;
-}
+.content-area { padding: 0 24px 32px; }
 
-/* Message de bienvenue repensé */
 .welcome-box {
   padding: 20px 24px;
   border-radius: var(--radius-md);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
   margin-bottom: 28px;
   text-align: center;
 }
@@ -220,17 +245,15 @@ h1 {
   line-height: 1.6;
 }
 
-/* Grille des boutons */
 .menu-grid {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* Style des cartes "Bouton" Menu */
 .menu-btn {
   text-decoration: none;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255,255,255,0.02);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   padding: 20px 22px;
@@ -242,57 +265,45 @@ h1 {
   transition: var(--transition);
 }
 
-/* Effet de lueur interne au survol */
 .menu-btn::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.06), transparent);
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.06), transparent);
   transform: translateX(-100%);
   transition: 0.6s ease;
 }
 
 .menu-btn:hover {
   transform: translateY(-4px) scale(1.01);
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(212, 175, 55, 0.35);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.1);
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(212,175,55,0.35);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 20px rgba(212,175,55,0.1);
 }
 
-.menu-btn:hover::before {
-  transform: translateX(100%);
-}
+.menu-btn:hover::before { transform: translateX(100%); }
+.menu-btn:active { transform: translateY(0) scale(0.98); }
 
-.menu-btn:active {
-  transform: translateY(0) scale(0.98);
-}
-
-/* Icônes de menu */
 .icon-wrapper {
   flex-shrink: 0;
-  width: 58px;
-  height: 58px;
+  width: 58px; height: 58px;
   border-radius: 20px;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.05);
   display: grid;
   place-items: center;
   transition: var(--transition);
-  position: relative;
 }
 
 .menu-btn:hover .icon-wrapper {
   border-color: var(--gold-primary);
-  background: rgba(212, 175, 55, 0.1);
+  background: rgba(212,175,55,0.1);
   animation: glowPulse 2s infinite;
 }
 
 .icon-wrapper svg {
-  width: 26px;
-  height: 26px;
+  width: 26px; height: 26px;
   stroke: var(--text-muted);
   stroke-width: 1.5;
   fill: none;
@@ -304,7 +315,6 @@ h1 {
   transform: scale(1.1);
 }
 
-/* Textes dans les boutons */
 .btn-content {
   flex-grow: 1;
   display: flex;
@@ -328,9 +338,7 @@ h1 {
   transition: var(--transition);
 }
 
-.menu-btn:hover .label {
-  color: #fff;
-}
+.menu-btn:hover .label { color: #fff; }
 
 .hint {
   font-size: 13px;
@@ -338,11 +346,9 @@ h1 {
   font-weight: 400;
 }
 
-/* Icône flèche d'indication */
 .arrow-icon {
-  width: 24px;
-  height: 24px;
-  stroke: rgba(255, 255, 255, 0.2);
+  width: 24px; height: 24px;
+  stroke: rgba(255,255,255,0.2);
   stroke-width: 2;
   fill: none;
   transition: var(--transition);
@@ -356,22 +362,18 @@ h1 {
   opacity: 1;
 }
 
-/* Pied de page */
 .footer {
   text-align: center;
   padding: 0 0 26px;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255,255,255,0.3);
   letter-spacing: 1px;
   font-weight: 500;
   text-transform: uppercase;
 }
 
-.footer span {
-  color: rgba(255, 255, 255, 0.5);
-}
+.footer span { color: rgba(255,255,255,0.5); }
 
-/* Ligne décorative au dessus du contenu */
 .deco-line {
   height: 1px;
   width: 50px;
@@ -380,9 +382,8 @@ h1 {
   opacity: 0.6;
 }
 
-/* Responsive Media Queries */
 @media (max-width: 480px) {
-  .header { padding: 32px 20px 18px; }
+  .header { padding: 20px 20px 18px; }
   .logo-container { width: 80px; height: 80px; margin-bottom: 18px; }
   h1 { font-size: 28px; }
   .content-area { padding: 0 20px 28px; }
@@ -390,14 +391,7 @@ h1 {
   .icon-wrapper { width: 50px; height: 50px; }
   .icon-wrapper svg { width: 22px; height: 22px; }
   .label { font-size: 18px; }
-  
-  /* Sur mobile on affiche la flèche par défaut */
-  .arrow-icon {
-    transform: translateX(0);
-    opacity: 0.5;
-    width: 20px;
-    height: 20px;
-  }
+  .arrow-icon { transform: translateX(0); opacity: 0.5; width: 20px; height: 20px; }
 }
 </style>
 </head>
@@ -406,7 +400,14 @@ h1 {
 
 <div class="wrap">
   <div class="main-card">
-    
+
+    <!-- Sélecteur de langue -->
+    <div class="lang-bar">
+      <button data-lang="fr" class="active" title="Français">🇫🇷</button>
+      <button data-lang="en" title="English">🇬🇧</button>
+      <button data-lang="de" title="Deutsch">🇩🇪</button>
+    </div>
+
     <div class="header">
       <div class="logo-container">
         <div class="logo">
@@ -414,74 +415,140 @@ h1 {
         </div>
       </div>
       <h1>Grey Corner • Fès</h1>
-      <div class="subtitle">Sélectionnez un menu</div>
+      <div class="subtitle" id="txt-subtitle">Sélectionnez un menu</div>
     </div>
-    
+
     <div class="deco-line"></div>
 
     <div class="content-area">
       <div class="welcome-box">
-        <b>L'Expérience Premium</b>
-        <p>Bienvenue dans l'univers Grey Corner. Accédez directement à nos menus officiels et découvrez nos sélections.</p>
+        <b id="txt-welcome-title">L'Expérience Premium</b>
+        <p id="txt-welcome-body">Bienvenue dans l'univers Grey Corner. Accédez directement à nos menus officiels et découvrez nos sélections.</p>
       </div>
 
       <div class="menu-grid">
+
+        <!-- Menu Ramadan -->
         <a class="menu-btn nav-link" href="https://ramadan-greycorner.pages.dev/">
           <div class="icon-wrapper">
             <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12.6A8.5 8.5 0 1 1 11.4 3a6.5 6.5 0 1 0 9.6 9.6Z"/>
-              <path d="M15 10l2 2-2 2" stroke-opacity="0" class="star-sparkle"/>
             </svg>
           </div>
           <div class="btn-content">
-            <div class="tag">Édition Spéciale</div>
-            <div class="label">Menu Ramadan</div>
-            <div class="hint">Formules Ftour & Délices traditionnels</div>
+            <div class="tag" id="txt-ramadan-tag">Édition Spéciale</div>
+            <div class="label" id="txt-ramadan-label">Menu Ramadan</div>
+            <div class="hint" id="txt-ramadan-hint">Formules Ftour & Délices traditionnels</div>
           </div>
           <svg class="arrow-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14"></path>
-            <path d="m12 5 7 7-7 7"></path>
+            <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
           </svg>
         </a>
 
+        <!-- Menu Principal -->
         <a class="menu-btn nav-link" href="https://menugreycorner.pages.dev/">
           <div class="icon-wrapper">
             <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
               <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-              <path d="M6 1v3"></path>
-              <path d="M10 1v3"></path>
-              <path d="M14 1v3"></path>
+              <path d="M6 1v3"></path><path d="M10 1v3"></path><path d="M14 1v3"></path>
             </svg>
           </div>
           <div class="btn-content">
-            <div class="tag">Menu Officiel</div>
-            <div class="label">Menu Principal</div>
-            <div class="hint">Café de spécialité, Brunch & Snacks</div>
+            <div class="tag" id="txt-main-tag">Menu Officiel</div>
+            <div class="label" id="txt-main-label">Menu Principal</div>
+            <div class="hint" id="txt-main-hint">Café de spécialité, Brunch & Snacks</div>
           </div>
           <svg class="arrow-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14"></path>
-            <path d="m12 5 7 7-7 7"></path>
+            <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
           </svg>
         </a>
+
       </div>
     </div>
 
-    <div class="footer">
-      © <span>Grey Corner</span> Fès
-    </div>
+    <div class="footer">© <span>Grey Corner</span> Fès</div>
 
   </div>
 </div>
 
 <script>
+// ==========================================
+// TRADUCTIONS
+// ==========================================
+const i18n = {
+  fr: {
+    subtitle:       "Sélectionnez un menu",
+    welcomeTitle:   "L'Expérience Premium",
+    welcomeBody:    "Bienvenue dans l'univers Grey Corner. Accédez directement à nos menus officiels et découvrez nos sélections.",
+    ramadanTag:     "Édition Spéciale",
+    ramadanLabel:   "Menu Ramadan",
+    ramadanHint:    "Formules Ftour & Délices traditionnels",
+    mainTag:        "Menu Officiel",
+    mainLabel:      "Menu Principal",
+    mainHint:       "Café de spécialité, Brunch & Snacks",
+  },
+  en: {
+    subtitle:       "Select a menu",
+    welcomeTitle:   "The Premium Experience",
+    welcomeBody:    "Welcome to the Grey Corner universe. Access our official menus directly and discover our selections.",
+    ramadanTag:     "Special Edition",
+    ramadanLabel:   "Ramadan Menu",
+    ramadanHint:    "Ftour specials & traditional delights",
+    mainTag:        "Official Menu",
+    mainLabel:      "Main Menu",
+    mainHint:       "Specialty coffee, Brunch & Snacks",
+  },
+  de: {
+    subtitle:       "Menü auswählen",
+    welcomeTitle:   "Das Premium-Erlebnis",
+    welcomeBody:    "Willkommen in der Welt des Grey Corner. Greifen Sie direkt auf unsere offiziellen Speisekarten zu.",
+    ramadanTag:     "Sonderedition",
+    ramadanLabel:   "Ramadan-Menü",
+    ramadanHint:    "Ftour-Angebote & traditionelle Köstlichkeiten",
+    mainTag:        "Offizielles Menü",
+    mainLabel:      "Hauptmenü",
+    mainHint:       "Spezialitätenkaffee, Brunch & Snacks",
+  }
+};
+
+function applyLang(lang) {
+  const t = i18n[lang] || i18n.fr;
+  document.getElementById("txt-subtitle").textContent      = t.subtitle;
+  document.getElementById("txt-welcome-title").textContent = t.welcomeTitle;
+  document.getElementById("txt-welcome-body").textContent  = t.welcomeBody;
+  document.getElementById("txt-ramadan-tag").textContent   = t.ramadanTag;
+  document.getElementById("txt-ramadan-label").textContent = t.ramadanLabel;
+  document.getElementById("txt-ramadan-hint").textContent  = t.ramadanHint;
+  document.getElementById("txt-main-tag").textContent      = t.mainTag;
+  document.getElementById("txt-main-label").textContent    = t.mainLabel;
+  document.getElementById("txt-main-hint").textContent     = t.mainHint;
+  document.documentElement.lang = lang;
+  localStorage.setItem("gc-lang", lang);
+
+  document.querySelectorAll(".lang-bar button").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.lang === lang);
+  });
+}
+
+// Langue : localStorage → navigateur → fr
+const savedLang  = localStorage.getItem("gc-lang");
+const browserLang = (navigator.language || navigator.userLanguage || "fr").slice(0, 2);
+const initLang   = savedLang || (i18n[browserLang] ? browserLang : "fr");
+applyLang(initLang);
+
+document.querySelectorAll(".lang-bar button").forEach(btn => {
+  btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+});
+
+// ==========================================
+// NAVIGATION AVEC ANIMATION
+// ==========================================
 let isNavigating = false;
 
-// Réinitialiser la page quand on revient dessus avec le bouton retour
 window.addEventListener('pageshow', function () {
   isNavigating = false;
   document.body.classList.remove('fade-out');
-
   document.querySelectorAll('.nav-link').forEach(link => {
     link.style.transform = '';
     link.style.opacity = '';
@@ -492,27 +559,14 @@ window.addEventListener('pageshow', function () {
 document.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', function(e) {
     e.preventDefault();
-
     if (isNavigating) return;
-
     isNavigating = true;
-
     const url = this.href;
-
-    // feedback visuel
     this.style.transform = 'scale(0.96)';
     this.style.opacity = '0.8';
     this.style.pointerEvents = 'none';
-
-    // animation de sortie
-    setTimeout(() => {
-      document.body.classList.add('fade-out');
-    }, 120);
-
-    // navigation réelle
-    setTimeout(() => {
-      window.location.href = url;
-    }, 520);
+    setTimeout(() => document.body.classList.add('fade-out'), 120);
+    setTimeout(() => window.location.href = url, 520);
   });
 });
 </script>
