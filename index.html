@@ -1,172 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Grey Corner Fès</title>
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --bg-dark: #0a090b;
+            --text-gray: #aaa;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: radial-gradient(circle at center, #1a191c 0%, var(--bg-dark) 100%);
+            color: #fff;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            opacity: 0; /* Pour l'effet d'entrée */
+            animation: fadeIn 0.8s forwards;
+        }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        .app-container {
+            width: 100%;
+            max-width: 340px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+        }
+
+        #subtitle {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-bottom: 48px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            border-radius: 50px;
+            background: var(--primary-gold);
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 17px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+            background: #b8972f;
+        }
+
+        /* Mobile Optimization */
+        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+        
+        [dir="rtl"] #subtitle { font-family: sans-serif; }
+    </style>
+</head>
 <body>
 
-<div class="hero">
-
-  <!-- BACKGROUND IMAGE -->
-  <div class="bg"></div>
-
-  <!-- OVERLAY -->
-  <div class="overlay"></div>
-
-  <!-- PARTICLES -->
-  <canvas id="particles"></canvas>
-
-  <!-- CONTENT -->
-  <div class="content">
-
-    <div class="logo"></div>
-
+<div class="app-container">
+    <img src="images/logo.png" alt="Grey Corner Logo" class="logo">
     <h1>Grey Corner</h1>
     <p id="subtitle">Fès • Café • Expérience</p>
-
-    <a href="https://menugreycorner.pages.dev/" class="btn">
-      Voir le Menu
+    <a href="https://menugreycorner.pages.dev/" class="btn" id="main-btn">
+        Voir le Menu
     </a>
-
-  </div>
-
 </div>
 
-<style>
-body{
-  margin:0;
-  font-family:'Playfair Display', serif;
-  background:#000;
-  overflow:hidden;
-}
-
-/* BG */
-.bg{
-  position:absolute;
-  inset:0;
-  background:url('images/bg.jpg') center/cover no-repeat;
-  filter:blur(8px) brightness(0.6);
-  transform:scale(1.1);
-}
-
-/* OVERLAY */
-.overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8));
-}
-
-/* PARTICLES */
-#particles{
-  position:absolute;
-  inset:0;
-}
-
-/* CONTENT */
-.content{
-  position:relative;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-
-/* LOGO */
-.logo{
-  width:70px;
-  height:70px;
-  border-radius:20px;
-  background:#000;
-  margin-bottom:20px;
-}
-
-/* TITLE */
-h1{
-  font-size:34px;
-  color:#f5e7c4;
-  margin-bottom:8px;
-}
-
-/* SUBTITLE */
-p{
-  color:#bbb;
-  font-size:13px;
-  margin-bottom:40px;
-}
-
-/* BUTTON */
-.btn{
-  padding:14px 32px;
-  border-radius:40px;
-  background:linear-gradient(135deg,#D4AF37,#F3E5AB);
-  color:#000;
-  text-decoration:none;
-  font-weight:600;
-  box-shadow:0 8px 25px rgba(212,175,55,0.4);
-  transition:0.2s;
-}
-
-.btn:active{
-  transform:scale(0.96);
-}
-
-/* MOBILE OPTIM */
-*{
-  -webkit-tap-highlight-color: transparent;
-}
-</style>
-
 <script>
-// PARTICULES LIGHT (plus fluide)
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+    const texts = {
+        fr: { sub: "Fès • Café • Expérience", btn: "Voir le Menu" },
+        en: { sub: "Fes • Coffee • Experience", btn: "View Menu" },
+        ar: { sub: "فاس • كافيه • تجربة", btn: "عرض القائمة" }
+    };
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+    // Détection langue
+    const userLang = navigator.language.slice(0, 2);
+    const content = texts[userLang] || texts.fr;
 
-let particles = [];
+    // Mise à jour du texte
+    const subtitle = document.getElementById("subtitle");
+    const btn = document.getElementById("main-btn");
 
-for(let i=0;i<30;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*1.5,
-    d:Math.random()*0.5
-  });
-}
+    subtitle.textContent = content.sub;
+    btn.textContent = content.btn;
 
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="rgba(212,175,55,0.6)";
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fill();
-    p.y+=p.d;
-    if(p.y>canvas.height){
-      p.y=0;
-      p.x=Math.random()*canvas.width;
+    // Gestion de la direction pour l'arabe
+    if (userLang === 'ar') {
+        document.body.setAttribute('dir', 'rtl');
     }
-  });
-}
 
-setInterval(draw,40);
-
-// LANG AUTO
-const lang = navigator.language.slice(0,2);
-const texts = {
-  fr:{sub:"Fès • Café • Expérience",btn:"Voir le Menu"},
-  en:{sub:"Fes • Coffee • Experience",btn:"View Menu"},
-  ar:{sub:"فاس • كافيه • تجربة",btn:"عرض القائمة"}
-};
-
-const t = texts[lang] || texts.fr;
-document.getElementById("subtitle").textContent = t.sub;
-document.querySelector(".btn").textContent = t.btn;
-
-// TRANSITION RAPIDE
-document.querySelector(".btn").addEventListener("click",function(e){
-  e.preventDefault();
-  document.body.style.opacity="0";
-  setTimeout(()=>{window.location=this.href},250);
-});
+    // Transition de sortie fluide
+    btn.addEventListener("click", function(e) {
+        e.preventDefault();
+        const target = this.href;
+        document.body.style.transition = "opacity 0.4s ease";
+        document.body.style.opacity = "0";
+        setTimeout(() => { window.location.href = target; }, 400);
+    });
 </script>
 
 </body>
+</html>
