@@ -7,7 +7,7 @@
     <style>
         :root {
             --primary-gold: #D4AF37;
-            --text-gray: #ccc; /* Un peu plus clair pour ressortir sur la vidéo */
+            --text-gray: #eee; /* Très clair pour la vidéo */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -17,14 +17,14 @@
             height: 100%;
             width: 100%;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #000;
+            background-color: #000; /* Fond de secours */
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* --- BACKGROUND VIDEO --- */
+        /* --- BACKGROUND VIDEO (ENFIN VISIBLE !) --- */
         .video-background {
             position: fixed;
             right: 0;
@@ -34,20 +34,22 @@
             width: auto;
             height: auto;
             z-index: -2;
-            object-fit: cover;
+            object-fit: cover; /* S'assure que la vidéo couvre tout l'écran sans déformer */
         }
 
+        /* Voile TRÈS léger et uniquement en bas pour la lisibilité du bouton */
         .video-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Ajuster l'opacité au besoin (0.6 = 60%) */
+            /* Dégradé subtil : transparent en haut, léger voile noir en bas */
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%);
             z-index: -1;
         }
 
-        /* --- CONTENT (FADE-IN SUR LA VIDÉO) --- */
+        /* --- CONTENT --- */
         .app-container {
             width: 100%;
             max-width: 340px;
@@ -56,40 +58,42 @@
             z-index: 1;
             opacity: 0;
             animation: fadeInWithVideo 1.2s forwards;
-            animation-delay: 0.5s;
+            animation-delay: 0.3s;
         }
 
         @keyframes fadeInWithVideo {
-            0% { opacity: 0; transform: translateY(10px); }
+            0% { opacity: 0; transform: translateY(15px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         .logo {
-            width: 100px;
-            height: 100px;
-            border-radius: 28px;
+            width: 110px;
+            height: 110px;
+            /* Pour gérer le fond noir du logo fourni */
+            border-radius: 50%; /* Arrondit le logo pour masquer les coins noirs */
+            background-color: #000; /* Assure que le fond du logo reste noir */
+            border: 2px solid rgba(212, 175, 55, 0.8); /* Bordure dorée prononcée */
             margin-bottom: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            background-color: transparent; /* Conserver le fond noir du logo */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            object-fit: cover; /* S'assure que le logo remplit le cercle */
         }
 
         h1 {
             color: #fff;
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 700;
-            margin: 0 0 8px 0;
+            margin: 0 0 10px 0;
             letter-spacing: -0.5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Améliore lisibilité */
+            text-shadow: 0 3px 6px rgba(0,0,0,0.9); /* Ombre forte pour lisibilité sur la vidéo */
         }
 
         #subtitle {
             color: var(--text-gray);
-            font-size: 14px;
-            margin-bottom: 48px;
+            font-size: 15px;
+            margin-bottom: 50px;
             font-weight: 400;
             letter-spacing: 1px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
         }
 
         .btn {
@@ -101,8 +105,8 @@
             color: #000;
             text-decoration: none;
             font-weight: 700;
-            font-size: 17px;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            font-size: 18px;
+            box-shadow: 0 4px 25px rgba(212, 175, 55, 0.5);
             transition: var(--transition);
             border: none;
             cursor: pointer;
@@ -137,25 +141,34 @@
 </div>
 
 <script>
+    // Configuration des textes (FR, EN, DE)
     const texts = {
         fr: { sub: "Fès • Café • Restaurant", btn: "Voir le Menu" },
         en: { sub: "Fes • Coffee • Restaurant", btn: "View Menu" },
         de: { sub: "Fes • Kaffee • Restaurant", btn: "Menü anzeigen" }
     };
 
+    // Détection automatique de la langue
     const userLang = navigator.language.slice(0, 2);
+    
+    // Sélection du contenu (par défaut français si la langue n'est pas supportée)
     const content = texts[userLang] || texts.fr;
 
+    // Mise à jour des éléments HTML
     document.getElementById("subtitle").textContent = content.sub;
     document.getElementById("main-btn").textContent = content.btn;
 
-    // Transition de sortie fluide
+    // Transition de sortie fluide lors du clic
     document.getElementById("main-btn").addEventListener("click", function(e) {
         e.preventDefault();
         const target = this.href;
+        
+        // On cache le contenu doucement
         document.querySelector(".app-container").style.transition = "opacity 0.4s ease, transform 0.4s ease";
         document.querySelector(".app-container").style.opacity = "0";
-        document.querySelector(".app-container").style.transform = "translateY(-10px)";
+        document.querySelector(".app-container").style.transform = "translateY(-15px)";
+        
+        // On redirige après la transition
         setTimeout(() => { window.location.href = target; }, 400);
     });
 </script>
