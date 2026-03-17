@@ -18,18 +18,24 @@
             color: #fff;
             overflow: hidden;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        /* --- VIDÉO --- */
-        #bg-video {
+        /* --- VIDÉO ARRIÈRE-PLAN --- */
+        #video-container {
             position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        #bg-video {
+            position: absolute;
             top: 50%; left: 50%;
             min-width: 100%; min-height: 100%;
             width: auto; height: auto;
-            z-index: -2;
             transform: translate(-50%, -50%);
             object-fit: cover;
         }
@@ -38,7 +44,7 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Ajuste la visibilité de la vidéo ici */
+            background: rgba(0, 0, 0, 0.4); /* Ajustez ici pour éclaircir/assombrir la vidéo */
             z-index: -1;
         }
 
@@ -51,16 +57,16 @@
         }
 
         .logo {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             border: 2px solid var(--gold);
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            margin-bottom: 25px;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
         }
 
-        h1 { font-size: 32px; margin: 0; font-weight: 700; }
-        p { color: #ccc; font-size: 14px; margin: 10px 0 40px; letter-spacing: 1px; }
+        h1 { font-size: 34px; margin: 0; font-weight: 700; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+        p { color: #eee; font-size: 15px; margin: 10px 0 45px; letter-spacing: 1px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
 
         /* --- BOUTON MENU --- */
         .btn-menu {
@@ -71,51 +77,53 @@
             padding: 18px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 18px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            transition: 0.3s;
+            font-size: 19px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transition: transform 0.2s;
         }
 
-        /* --- BOUTONS LANGUES --- */
+        .btn-menu:active { transform: scale(0.97); }
+
+        /* --- LANGUES --- */
         .lang-switcher {
-            margin-top: 30px;
+            margin-top: 35px;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .lang-btn {
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.3);
             color: #fff;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 12px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 13px;
             cursor: pointer;
+            backdrop-filter: blur(5px);
             transition: 0.3s;
-            text-transform: uppercase;
         }
 
         .lang-btn.active {
             border-color: var(--gold);
             color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
         }
-
-        .lang-btn:hover { background: rgba(255,255,255,0.2); }
-
     </style>
 </head>
 <body>
 
-    <video autoplay loop muted playsinline id="bg-video">
-        <source src="video/cafe.mp4" type="video/mp4">
-    </video>
+    <div id="video-container">
+        <video autoplay loop muted playsinline id="bg-video">
+            <source src="video/cafe.mp4" type="video/mp4">
+        </video>
+    </div>
 
     <div class="overlay"></div>
 
     <div class="content">
-        <img src="images/logo.png" class="logo" alt="Logo">
-        <h1 id="title">Grey Corner</h1>
+        <img src="images/logo.png" class="logo" alt="Grey Corner Logo">
+        <h1>Grey Corner</h1>
         <p id="subtitle">Fès • Café • Restaurant</p>
         
         <a href="https://menugreycorner.pages.dev/" class="btn-menu" id="menu-btn">
@@ -123,9 +131,9 @@
         </a>
 
         <div class="lang-switcher">
-            <div class="lang-btn active" onclick="setLang('fr')">FR</div>
-            <div class="lang-btn" onclick="setLang('en')">EN</div>
-            <div class="lang-btn" onclick="setLang('de')">DE</div>
+            <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" onclick="setLang('de')">DE</button>
         </div>
     </div>
 
@@ -137,18 +145,22 @@
         };
 
         function setLang(lang) {
-            // Mise à jour textes
             document.getElementById('subtitle').innerText = translations[lang].sub;
             document.getElementById('menu-btn').innerText = translations[lang].btn;
 
-            // Mise à jour style boutons
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if(btn.innerText.toLowerCase() === lang) btn.classList.add('active');
             });
         }
 
-        // Détection auto au démarrage
+        // Force la lecture sur mobile si le navigateur bloque l'autoplay
+        window.addEventListener('touchstart', function() {
+            const video = document.getElementById('bg-video');
+            if (video.paused) video.play();
+        }, {once: true});
+
+        // Détection auto
         const userLang = navigator.language.slice(0, 2);
         if (translations[userLang]) setLang(userLang);
     </script>
