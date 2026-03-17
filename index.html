@@ -2,31 +2,24 @@
 
 <div class="hero">
 
-  <!-- VIDEO BACKGROUND -->
-  <video autoplay muted loop playsinline class="bg-video" id="bgVideo">
-    <source src="video/cafe.mp4" type="video/mp4">
-  </video>
-
-  <!-- FALLBACK IMAGE -->
-  <div class="bg-fallback"></div>
+  <!-- BACKGROUND IMAGE -->
+  <div class="bg"></div>
 
   <!-- OVERLAY -->
   <div class="overlay"></div>
 
-  <!-- PARTICULES -->
+  <!-- PARTICLES -->
   <canvas id="particles"></canvas>
 
-  <!-- CONTENU -->
+  <!-- CONTENT -->
   <div class="content">
 
-    <div class="logo-box">
-      <img src="images/logo.png" alt="Grey Corner">
-    </div>
+    <div class="logo"></div>
 
     <h1>Grey Corner</h1>
-    <p class="subtitle" id="subtitle">Fès • Coffee • Experience</p>
+    <p id="subtitle">Fès • Café • Expérience</p>
 
-    <a href="https://menugreycorner.pages.dev/" class="cta-btn nav-link" id="cta">
+    <a href="https://menugreycorner.pages.dev/" class="btn">
       Voir le Menu
     </a>
 
@@ -37,46 +30,31 @@
 <style>
 body{
   margin:0;
-  font-family:'Plus Jakarta Sans',sans-serif;
+  font-family:'Playfair Display', serif;
   background:#000;
   overflow:hidden;
 }
 
-/* VIDEO */
-.bg-video{
-  position:absolute;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:-3;
-  filter:brightness(0.45);
-}
-
-/* FALLBACK IMAGE */
-.bg-fallback{
+/* BG */
+.bg{
   position:absolute;
   inset:0;
   background:url('images/bg.jpg') center/cover no-repeat;
-  z-index:-4;
+  filter:blur(8px) brightness(0.6);
+  transform:scale(1.1);
 }
 
 /* OVERLAY */
 .overlay{
   position:absolute;
   inset:0;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(212,175,55,0.2), transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(212,175,55,0.1), transparent 40%),
-    rgba(0,0,0,0.6);
-  backdrop-filter: blur(8px);
-  z-index:-2;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8));
 }
 
 /* PARTICLES */
 #particles{
   position:absolute;
   inset:0;
-  z-index:-1;
 }
 
 /* CONTENT */
@@ -88,120 +66,91 @@ body{
   align-items:center;
   justify-content:center;
   text-align:center;
-  animation:fadeUp 1.2s ease;
 }
 
 /* LOGO */
-.logo-box{
-  width:110px;
-  height:110px;
-  border-radius:30px;
-  overflow:hidden;
+.logo{
+  width:70px;
+  height:70px;
+  border-radius:20px;
+  background:#000;
   margin-bottom:20px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.8);
-  animation:float 6s ease-in-out infinite;
 }
 
 /* TITLE */
 h1{
-  font-family:"Playfair Display",serif;
-  font-size:46px;
-  background:linear-gradient(to right,#fff,#D4AF37);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  font-size:34px;
+  color:#f5e7c4;
+  margin-bottom:8px;
 }
 
 /* SUBTITLE */
-.subtitle{
-  color:#ccc;
-  margin-bottom:50px;
-  letter-spacing:3px;
+p{
+  color:#bbb;
   font-size:13px;
+  margin-bottom:40px;
 }
 
 /* BUTTON */
-.cta-btn{
-  padding:18px 46px;
-  border-radius:50px;
-  text-decoration:none;
-  font-weight:600;
+.btn{
+  padding:14px 32px;
+  border-radius:40px;
   background:linear-gradient(135deg,#D4AF37,#F3E5AB);
   color:#000;
-  box-shadow:0 10px 40px rgba(212,175,55,0.5);
-  transition:0.4s;
+  text-decoration:none;
+  font-weight:600;
+  box-shadow:0 8px 25px rgba(212,175,55,0.4);
+  transition:0.2s;
 }
 
-.cta-btn:hover{
-  transform:scale(1.1);
-  box-shadow:0 20px 60px rgba(212,175,55,0.7);
+.btn:active{
+  transform:scale(0.96);
 }
 
-/* ANIMATIONS */
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(40px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-@keyframes float{
-  0%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
-  100%{transform:translateY(0);}
-}
-
-/* MOBILE */
-@media(max-width:480px){
-  h1{font-size:34px;}
-  .logo-box{width:90px;height:90px;}
+/* MOBILE OPTIM */
+*{
+  -webkit-tap-highlight-color: transparent;
 }
 </style>
 
 <script>
-// ================= PARTICULES OR =================
+// PARTICULES LIGHT (plus fluide)
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
 
-for(let i=0;i<60;i++){
+for(let i=0;i<30;i++){
   particles.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
-    r:Math.random()*2,
-    d:Math.random()*1
+    r:Math.random()*1.5,
+    d:Math.random()*0.5
   });
 }
 
 function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   ctx.fillStyle="rgba(212,175,55,0.6)";
-  ctx.beginPath();
-  for(let i=0;i<particles.length;i++){
-    let p = particles[i];
-    ctx.moveTo(p.x,p.y);
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
-  }
-  ctx.fill();
-  update();
-}
-
-function update(){
-  for(let i=0;i<particles.length;i++){
-    let p = particles[i];
-    p.y += p.d;
-    if(p.y > canvas.height){
-      p.y = 0;
-      p.x = Math.random()*canvas.width;
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+    p.y+=p.d;
+    if(p.y>canvas.height){
+      p.y=0;
+      p.x=Math.random()*canvas.width;
     }
-  }
+  });
 }
 
-setInterval(draw,33);
+setInterval(draw,40);
 
-// ================= LANG AUTO =================
+// LANG AUTO
 const lang = navigator.language.slice(0,2);
-
 const texts = {
   fr:{sub:"Fès • Café • Expérience",btn:"Voir le Menu"},
   en:{sub:"Fes • Coffee • Experience",btn:"View Menu"},
@@ -210,19 +159,13 @@ const texts = {
 
 const t = texts[lang] || texts.fr;
 document.getElementById("subtitle").textContent = t.sub;
-document.getElementById("cta").textContent = t.btn;
+document.querySelector(".btn").textContent = t.btn;
 
-// ================= TRANSITION =================
-document.querySelector('.cta-btn').addEventListener('click',function(e){
+// TRANSITION RAPIDE
+document.querySelector(".btn").addEventListener("click",function(e){
   e.preventDefault();
   document.body.style.opacity="0";
-  setTimeout(()=>{window.location=this.href},500);
-});
-
-// ================= VIDEO FALLBACK =================
-const video = document.getElementById("bgVideo");
-video.addEventListener("error",()=>{
-  video.style.display="none";
+  setTimeout(()=>{window.location=this.href},250);
 });
 </script>
 
