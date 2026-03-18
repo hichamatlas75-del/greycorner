@@ -8,18 +8,19 @@
     <style>
         :root {
             --gold: #D4AF37;
+            --gold-dark: #b8952d;
         }
 
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            height: 100dvh;           /* très utile sur mobile récent */
+            height: 100dvh;
             width: 100%;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #000;
             color: #fff;
             overflow: hidden;
+            background: #000; /* fallback très sombre */
         }
 
         /* ── VIDÉO DE FOND ── */
@@ -30,7 +31,14 @@
             height: 100%;
             z-index: -2;
             overflow: hidden;
-            background: #000;           /* fallback */
+            /* Gradient à gauche + noir central/droite */
+            background: linear-gradient(
+                to right,
+                #1a1408 0%,        /* côté gauche très sombre / teinté or-noir */
+                #0f0b04 35%,       /* transition */
+                #000 60%,          /* noir pur à partir du milieu */
+                #000 100%
+            );
         }
 
         #bg-video {
@@ -42,15 +50,15 @@
             width: auto;
             height: auto;
             transform: translate(-50%, -50%);
-            object-fit: cover;          /* très important */
+            object-fit: cover;
             z-index: -2;
-            pointer-events: none;       /* évite interactions indésirables */
+            pointer-events: none;
         }
 
         .overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.55); /* un peu plus fort pour lisibilité */
+            background: rgba(0,0,0,0.58); /* un peu plus fort pour contraste */
             z-index: -1;
         }
 
@@ -99,7 +107,6 @@
             text-transform: uppercase;
         }
 
-        /* BOUTON */
         .btn-menu {
             display: inline-block;
             background: var(--gold);
@@ -121,10 +128,9 @@
 
         .btn-menu:active {
             transform: scale(0.97);
-            background: #b8952d;
+            background: var(--gold-dark);
         }
 
-        /* LANGUES */
         .lang-switcher {
             margin-top: 50px;
             display: flex;
@@ -166,8 +172,6 @@
            preload="metadata"
            poster="images/bg.jpg">
         <source src="video/cafe.mp4" type="video/mp4">
-        <!-- Vous pouvez ajouter d'autres formats si besoin -->
-        <!-- <source src="video/cafe.webm" type="video/webm"> -->
     </video>
 </div>
 
@@ -209,20 +213,14 @@
         });
     }
 
-    // Auto-langue + tentative de lecture
     window.addEventListener('load', () => {
         const userLang = navigator.language.slice(0,2);
         if (translations[userLang]) setLang(userLang);
 
-        video.play().catch(() => {
-            console.log("Autoplay bloqué → attend interaction utilisateur");
-        });
+        video.play().catch(() => {});
     });
 
-    // Sur mobile, le premier touch peut débloquer
-    document.addEventListener('touchstart', () => {
-        video.play();
-    }, { once: true });
+    document.addEventListener('touchstart', () => video.play(), { once: true });
 </script>
 
 </body>
