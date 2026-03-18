@@ -11,93 +11,94 @@
             --gold-dark: #b8952d;
         }
 
-        body, html {
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
             margin: 0;
             padding: 0;
             height: 100%;
             height: 100dvh;
             width: 100%;
+            overflow: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #fff;
-            overflow: hidden;
-            background: #000; /* fallback très sombre */
+            /* On vire TOUT fond par défaut ici pour ne plus être gêné */
+            background: transparent !important;
         }
 
-        /* ── VIDÉO DE FOND ── */
-        #video-container {
+        /* ── CONTAINER VIDÉO ── (doit absolument couvrir tout) */
+        #video-bg-wrap {
             position: fixed;
             inset: 0;
             width: 100%;
-            height: 100%;
-            z-index: -2;
+            height: 100dvh;
+            z-index: -10;               /* très bas */
+            background: #000;           /* fallback temporaire si vidéo rate */
             overflow: hidden;
-            /* Gradient à gauche + noir central/droite */
-            background: linear-gradient(to right, #2a1c0a 0%, #1a1206 40%, #000 70%, #000 100%);
         }
 
         #bg-video {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-            z-index: -2;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;          /* ESSENTIEL */
+            object-position: center;
             pointer-events: none;
         }
 
+        /* Overlay sombre (ajustable) */
         .overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.58); /* un peu plus fort pour contraste */
-            z-index: -1;
+            background: rgba(0,0,0,0.62);
+            z-index: -5;
         }
 
-        /* ── CONTENU ── */
+        /* ── Contenu principal ── */
         .content {
             position: relative;
-            z-index: 10;
+            z-index: 20;
             height: 100dvh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 20px;
-            animation: fadeIn 1.3s ease-out;
+            padding: 20px 15px;
+            animation: fadeIn 1.4s ease-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0);    }
+            from { opacity: 0; transform: translateY(25px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .logo {
             width: 140px;
             height: 140px;
             border-radius: 50%;
-            border: 2px solid var(--gold);
-            margin-bottom: 30px;
-            box-shadow: 0 0 40px rgba(212,175,55,0.35);
+            border: 2.5px solid var(--gold);
+            margin-bottom: 35px;
+            box-shadow: 0 0 50px rgba(212,175,55,0.3);
             object-fit: cover;
         }
 
         h1 {
-            font-size: clamp(28px, 7vw, 38px);
-            margin: 0 0 0.4em;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-shadow: 0 3px 20px rgba(0,0,0,0.9);
+            font-size: clamp(2.1rem, 8vw, 3.2rem);
+            margin: 0 0 0.3em;
+            font-weight: 900;
+            letter-spacing: 1.8px;
+            text-shadow: 0 4px 25px rgba(0,0,0,0.95);
         }
 
-        p {
-            color: #ddd;
-            font-size: clamp(14px, 4vw, 16px);
-            margin: 0 0 2.5em;
-            letter-spacing: 2.5px;
+        #subtitle {
+            color: #e0e0e0;
+            font-size: clamp(0.95rem, 4.2vw, 1.15rem);
+            margin: 0 0 3em;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
 
@@ -106,38 +107,30 @@
             background: var(--gold);
             color: #000;
             text-decoration: none;
-            padding: 16px 38px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 17px;
-            transition: all 0.25s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+            padding: 17px 45px;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            transition: all 0.28s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .btn-menu:hover,
-        .btn-menu:focus {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-        }
-
-        .btn-menu:active {
-            transform: scale(0.97);
-            background: var(--gold-dark);
-        }
+        .btn-menu:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.55); }
+        .btn-menu:active { transform: scale(0.96); background: var(--gold-dark); }
 
         .lang-switcher {
-            margin-top: 50px;
+            margin-top: 60px;
             display: flex;
-            gap: 12px;
+            gap: 14px;
         }
 
         .lang-btn {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.3);
             color: white;
-            padding: 9px 16px;
-            border-radius: 10px;
-            font-size: 13px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -145,19 +138,22 @@
         .lang-btn.active {
             border-color: var(--gold);
             color: var(--gold);
-            background: rgba(212,175,55,0.12);
+            background: rgba(212,175,55,0.15);
         }
 
         @media (max-width: 480px) {
-            .logo   { width: 120px; height: 120px; }
-            h1      { font-size: 30px; }
-            .btn-menu { padding: 14px 32px; font-size: 16px; }
+            .logo { width: 120px; height: 120px; margin-bottom: 25px; }
+            h1 { font-size: 2.4rem; }
+            .btn-menu { padding: 14px 38px; font-size: 1rem; }
+            .lang-switcher { gap: 10px; }
+            .lang-btn { padding: 9px 15px; font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
 
-<div id="video-container">
+<!-- Vidéo en ABSOLU et FULL COVER -->
+<div id="video-bg-wrap">
     <video id="bg-video"
            autoplay
            loop
@@ -181,9 +177,9 @@
     </a>
 
     <div class="lang-switcher">
-        <button class="lang-btn active"   data-lang="fr" onclick="setLang('fr')">FR</button>
-        <button class="lang-btn"         data-lang="en" onclick="setLang('en')">EN</button>
-        <button class="lang-btn"         data-lang="de" onclick="setLang('de')">DE</button>
+        <button class="lang-btn active" data-lang="fr" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" data-lang="de" onclick="setLang('de')">DE</button>
     </div>
 </div>
 
@@ -198,7 +194,6 @@
 
     function setLang(lang) {
         if (!translations[lang]) return;
-
         document.getElementById('subtitle').textContent = translations[lang].sub;
         document.getElementById('menu-btn').textContent = translations[lang].btn;
 
@@ -207,13 +202,14 @@
         });
     }
 
+    // Auto-langue + play forcé
     window.addEventListener('load', () => {
-        const userLang = navigator.language.slice(0,2);
-        if (translations[userLang]) setLang(userLang);
-
-        video.play().catch(() => {});
+        const lang = navigator.language.slice(0,2);
+        if (translations[lang]) setLang(lang);
+        video.play().catch(e => console.log("Autoplay bloqué", e));
     });
 
+    // Déblocage mobile au premier touch
     document.addEventListener('touchstart', () => video.play(), { once: true });
 </script>
 
