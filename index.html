@@ -428,6 +428,58 @@
       .footer-link .f-label { display: none; }
       .footer-link { padding: 8px 12px; }
     }
+
+    /* ── BOUTON PARTAGER ── */
+    .btn-share {
+      position: fixed;
+      top: 18px;
+      left: 22px;
+      z-index: 100;
+      background: none;
+      border: 1px solid rgba(201,168,76,0.28);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 13px 7px 10px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: color 0.25s, border-color 0.25s, background 0.25s;
+      animation: fadeUp 1.2s 0.6s cubic-bezier(.22,1,.36,1) both;
+    }
+    .btn-share svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; flex-shrink: 0; }
+    .btn-share:hover { color: var(--gold-light); border-color: var(--gold); background: rgba(201,168,76,0.06); }
+    .btn-share:active { background: rgba(201,168,76,0.12); }
+
+    /* Toast confirmation */
+    .share-toast {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: rgba(20,18,14,0.92);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold-light);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      padding: 10px 20px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      backdrop-filter: blur(10px);
+      z-index: 300;
+    }
+    .share-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -439,6 +491,15 @@
     </video>
   </div>
   <div class="grain"></div>
+
+  <!-- BOUTON PARTAGER -->
+  <button class="btn-share" onclick="partager()" aria-label="Partager">
+    <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke-linecap="round"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke-linecap="round"/></svg>
+    <span class="f-label" data-i18n="shareBtn">Partager</span>
+  </button>
+
+  <!-- TOAST -->
+  <div class="share-toast" id="shareToast" data-i18n-toast="shareCopied">Lien copié ✓</div>
 
   <!-- LANG SWITCHER -->
   <div class="lang-bar">
@@ -568,7 +629,8 @@
         cat1: "☕ Petit Déjeuner", cat2: "🍽️ Restaurant",
         days1: "Lun – Ven", days2: "Sam · Dim · Fériés",
         days3: "Lun – Ven", days4: "Samedi", days5: "Dimanche",
-        mapLink: "Nous trouver"
+        mapLink: "Nous trouver",
+        shareBtn: "Partager", shareCopied: "Lien copié ✓"
       },
       en: {
         location: "Fès \u00a0·\u00a0 Café \u00a0·\u00a0 Restaurant",
@@ -578,7 +640,8 @@
         cat1: "☕ Breakfast", cat2: "🍽️ Restaurant",
         days1: "Mon – Fri", days2: "Sat · Sun · Holidays",
         days3: "Mon – Fri", days4: "Saturday", days5: "Sunday",
-        mapLink: "Find Us"
+        mapLink: "Find Us",
+        shareBtn: "Share", shareCopied: "Link copied ✓"
       },
       de: {
         location: "Fès \u00a0·\u00a0 Café \u00a0·\u00a0 Restaurant",
@@ -588,11 +651,15 @@
         cat1: "☕ Frühstück", cat2: "🍽️ Restaurant",
         days1: "Mo – Fr", days2: "Sa · So · Feiertage",
         days3: "Mo – Fr", days4: "Samstag", days5: "Sonntag",
-        mapLink: "Uns finden"
+        mapLink: "Uns finden",
+        shareBtn: "Teilen", shareCopied: "Link kopiert ✓"
       }
     };
 
+    let currentLang = 'fr';
+
     function setLang(lang) {
+      currentLang = lang;
       document.documentElement.lang = lang;
       const t = i18n[lang];
       document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -602,6 +669,40 @@
       document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
       });
+    }
+
+    // ── PARTAGER ──
+    async function partager() {
+      const url  = 'https://greycorner.pages.dev/';
+      const t    = i18n[currentLang];
+      const data = {
+        title: 'Grey Corner – Café & Restaurant à Fès',
+        text:  t.desc,
+        url
+      };
+      // Web Share API (mobile natif)
+      if (navigator.share) {
+        try { await navigator.share(data); return; } catch(e) { /* annulé */ return; }
+      }
+      // Fallback : copie dans le presse-papier
+      try {
+        await navigator.clipboard.writeText(url);
+      } catch {
+        // Dernier recours
+        const ta = document.createElement('textarea');
+        ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      showToast(t.shareCopied);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('shareToast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
     }
 
     function toggleHoraires() {
