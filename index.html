@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Grey Corner – Café & Restaurant à Fès</title>
   <meta name="description" content="Grey Corner – Café & Restaurant à Fès. Un espace où l'atmosphère fait partie de l'expérience. Découvrez notre menu et nos horaires." />
   <meta property="og:title" content="Grey Corner – Café & Restaurant à Fès" />
@@ -35,16 +35,22 @@
       --border:     rgba(201,168,76,0.22);
     }
 
-    html, body {
+    /* ── BASE : une seule page, zéro scroll ── */
+    html {
       height: 100%;
+      height: 100dvh;
+    }
+    body {
+      height: 100%;
+      height: 100dvh;
       background: var(--dark);
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
-    /* VIDEO BACKGROUND */
+    /* ── VIDEO BACKGROUND ── */
     .video-bg {
       position: fixed;
       inset: 0;
@@ -70,7 +76,7 @@
         );
     }
 
-    /* GRAIN */
+    /* ── GRAIN ── */
     .grain {
       position: fixed;
       inset: 0;
@@ -81,20 +87,23 @@
       opacity: 0.022;
     }
 
-    /* PAGE */
+    /* ── PAGE WRAPPER ── */
     .page {
       position: relative;
       z-index: 2;
-      min-height: 100vh;
+      height: 100%;
+      height: 100dvh;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
-    /* LANG SWITCHER */
+    /* ── LANG SWITCHER ── */
     .lang-bar {
-      position: fixed;
-      top: 22px;
-      right: 26px;
+      position: absolute;
+      top: env(safe-area-inset-top, 0px);
+      right: 0;
+      padding: 18px 22px 0;
       display: flex;
       align-items: center;
       gap: 5px;
@@ -118,7 +127,7 @@
     .lang-btn.active { color: var(--gold-light); border-bottom-color: var(--gold); }
     .lang-sep { color: rgba(201,168,76,0.25); font-size: 10px; user-select: none; }
 
-    /* HERO */
+    /* ── HERO : prend tout l'espace dispo ── */
     .hero {
       flex: 1;
       display: flex;
@@ -126,16 +135,16 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 100px 24px 60px;
-      min-height: 100vh;
+      padding: 0 20px;
+      min-height: 0; /* important pour flex */
     }
 
     .logo-wrap {
-      margin-bottom: 28px;
+      margin-bottom: clamp(12px, 2.5vh, 28px);
       animation: fadeUp 1.2s cubic-bezier(.22,1,.36,1) both;
     }
     .logo-wrap img {
-      width: clamp(72px, 12vw, 108px);
+      width: clamp(60px, 14vw, 108px);
       filter: drop-shadow(0 0 24px rgba(201,168,76,0.2));
     }
 
@@ -143,11 +152,11 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 14px;
+      margin-bottom: clamp(8px, 1.5vh, 14px);
       animation: fadeUp 1.2s 0.1s cubic-bezier(.22,1,.36,1) both;
     }
     .orn-line {
-      width: 44px; height: 1px;
+      width: 36px; height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold));
     }
     .orn-line.r { background: linear-gradient(90deg, var(--gold), transparent); }
@@ -155,7 +164,7 @@
 
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(56px, 13vw, 104px);
+      font-size: clamp(46px, 13vw, 104px);
       font-weight: 300;
       letter-spacing: 0.1em;
       line-height: 1;
@@ -165,40 +174,39 @@
     .hero-location {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: clamp(13px, 2.2vw, 17px);
+      font-size: clamp(12px, 3vw, 17px);
       color: var(--muted);
-      letter-spacing: 0.3em;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      margin-top: 10px;
+      margin-top: clamp(6px, 1vh, 10px);
       animation: fadeUp 1.2s 0.22s cubic-bezier(.22,1,.36,1) both;
     }
 
     .hero-desc {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: clamp(17px, 2.6vw, 21px);
+      font-size: clamp(15px, 3.5vw, 21px);
       color: rgba(240,234,216,0.55);
-      max-width: 400px;
-      line-height: 1.7;
-      margin-top: 24px;
+      max-width: 360px;
+      line-height: 1.6;
+      margin-top: clamp(10px, 2vh, 24px);
       animation: fadeUp 1.2s 0.28s cubic-bezier(.22,1,.36,1) both;
     }
 
-    /* GRAND BOUTON MENU */
+    /* ── GRAND BOUTON MENU ── */
     .btn-menu-wrap {
-      margin-top: 44px;
+      margin-top: clamp(20px, 4vh, 44px);
       animation: fadeUp 1.2s 0.36s cubic-bezier(.22,1,.36,1) both;
       position: relative;
     }
-
     .btn-menu {
       display: inline-block;
-      padding: 22px 80px;
+      padding: clamp(14px, 2.5vh, 22px) clamp(40px, 10vw, 80px);
       background: transparent;
       border: 1.5px solid var(--gold);
       color: var(--gold-light);
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(22px, 4.5vw, 32px);
+      font-size: clamp(20px, 5vw, 32px);
       font-weight: 400;
       letter-spacing: 0.3em;
       text-transform: uppercase;
@@ -215,11 +223,12 @@
       transform: translateX(-102%);
       transition: transform 0.42s cubic-bezier(.22,1,.36,1);
     }
-    .btn-menu:hover::before { transform: translateX(0); }
-    .btn-menu:hover { color: #0C0B09; }
+    .btn-menu:hover::before,
+    .btn-menu:active::before { transform: translateX(0); }
+    .btn-menu:hover,
+    .btn-menu:active { color: #0C0B09; }
     .btn-menu span { position: relative; z-index: 1; }
 
-    /* glow pulse autour du bouton */
     .btn-menu-wrap::after {
       content: '';
       position: absolute;
@@ -229,23 +238,22 @@
       animation: glowPulse 3.2s ease-in-out infinite;
     }
     @keyframes glowPulse {
-      0%,100% { box-shadow: 0 0 0px rgba(201,168,76,0); opacity:0.5; }
+      0%,100% { box-shadow: 0 0 0px rgba(201,168,76,0); opacity:.5; }
       50%      { box-shadow: 0 0 32px rgba(201,168,76,0.2); opacity:1; }
     }
 
-    /* HORAIRES */
+    /* ── HORAIRES TOGGLE (dans le hero) ── */
     .horaires-wrap {
-      margin-top: 52px;
+      margin-top: clamp(16px, 3vh, 44px);
       width: 100%;
-      max-width: 500px;
+      max-width: 460px;
       animation: fadeUp 1.2s 0.44s cubic-bezier(.22,1,.36,1) both;
     }
-
     .horaires-toggle {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       width: 100%;
       background: none;
       border: none;
@@ -254,49 +262,69 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 10px;
       font-weight: 500;
-      letter-spacing: 0.24em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      padding: 10px 0;
+      padding: 8px 0;
       transition: color 0.25s;
     }
-    .horaires-toggle:hover { color: var(--gold-light); }
+    .horaires-toggle:hover,
+    .horaires-toggle:active { color: var(--gold-light); }
     .h-arrow { font-size: 9px; transition: transform 0.3s; display: inline-block; }
     .horaires-toggle.open .h-arrow { transform: rotate(180deg); }
 
+    /* ── HORAIRES PANEL : overlay fixe sur mobile ── */
     .horaires-panel {
       display: none;
-      border: 1px solid var(--border);
-      background: rgba(12,11,9,0.78);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      padding: 28px 32px;
-      margin-top: 6px;
-      position: relative;
     }
-    .horaires-panel::before {
+    .horaires-panel.open {
+      display: block;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(12,11,9,0.96);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-top: 1px solid var(--border);
+      padding: 20px 24px 28px;
+      animation: slideUp 0.32s cubic-bezier(.22,1,.36,1) both;
+    }
+    .horaires-panel.open::before {
       content: '';
       position: absolute;
-      top: 0; left: 24px; right: 24px; height: 1px;
+      top: 0; left: 20%; right: 20%; height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: 0.4;
+      opacity: 0.5;
     }
-    .horaires-panel.open { display: block; animation: panelIn 0.3s ease both; }
-    @keyframes panelIn {
-      from { opacity: 0; transform: translateY(-6px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+
+    /* Poignée de fermeture */
+    .panel-handle {
+      width: 36px; height: 3px;
+      background: rgba(201,168,76,0.3);
+      border-radius: 2px;
+      margin: 0 auto 16px;
+    }
+
+    .h-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 20px;
     }
 
     .h-cat-title {
       font-family: 'DM Sans', sans-serif;
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
     .h-cat-title::after { content:''; flex:1; height:1px; background: var(--border); }
 
@@ -304,59 +332,101 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 6px 0;
+      padding: 4px 0;
       border-bottom: 1px solid rgba(201,168,76,0.07);
     }
     .h-row:last-child { border-bottom: none; }
     .h-days {
       font-family: 'DM Sans', sans-serif;
-      font-size: 12px; font-weight: 300;
-      color: rgba(240,234,216,0.6);
+      font-size: 11px; font-weight: 300;
+      color: rgba(240,234,216,0.58);
     }
     .h-time {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 15px; font-weight: 400;
+      font-size: 14px; font-weight: 400;
       color: var(--gold-light);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
     }
-    .h-divider { height:1px; background: var(--border); margin: 18px 0; opacity:0.4; }
 
-    /* FOOTER */
+    /* backdrop cliquable pour fermer */
+    .horaires-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 199;
+      background: rgba(0,0,0,0.4);
+    }
+    .horaires-backdrop.open { display: block; }
+
+    /* ── FOOTER ── */
     .footer-links {
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 24px;
-      padding: 30px 24px 42px;
+      gap: 0;
+      padding: clamp(10px, 2vh, 20px) 16px;
+      padding-bottom: max(clamp(10px, 2vh, 20px), env(safe-area-inset-bottom, 0px));
       animation: fadeUp 1.2s 0.52s cubic-bezier(.22,1,.36,1) both;
     }
     .footer-link {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       color: var(--muted);
       text-decoration: none;
       font-family: 'DM Sans', sans-serif;
       font-size: 11px; font-weight: 400;
       letter-spacing: 0.09em;
       transition: color 0.25s;
+      padding: 8px 16px;
     }
-    .footer-link:hover { color: var(--gold-light); }
-    .footer-link svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
-    .footer-sep { width:1px; height:14px; background: var(--border); }
+    .footer-link:hover,
+    .footer-link:active { color: var(--gold-light); }
+    .footer-link svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+    /* Texte masqué sur petit écran */
+    .footer-link .f-label { display: inline; }
+    .footer-sep { width:1px; height:14px; background: var(--border); flex-shrink:0; }
 
-    /* ANIMATIONS */
+    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
+      from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 480px) {
-      .btn-menu { padding: 18px 48px; font-size: 22px; letter-spacing: 0.22em; }
-      .horaires-panel { padding: 22px 16px; }
-      .footer-links { gap: 16px; }
+    /* ── DESKTOP : panel inline sous le toggle ── */
+    @media (min-width: 640px) {
+      .horaires-panel.open {
+        position: static;
+        border: 1px solid var(--border);
+        border-top: none;
+        background: rgba(12,11,9,0.78);
+        padding: 22px 28px 24px;
+        animation: panelIn 0.3s ease both;
+      }
+      @keyframes panelIn {
+        from { opacity: 0; transform: translateY(-6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .panel-handle { display: none; }
+      .h-grid { grid-template-columns: 1fr 1fr; }
+      .horaires-backdrop { display: none !important; }
+    }
+
+    /* ── MOBILE SERRÉ : masquer la description si trop petit ── */
+    @media (max-height: 620px) {
+      .hero-desc { display: none; }
+      .logo-wrap { margin-bottom: 10px; }
+    }
+    @media (max-height: 520px) {
+      .ornament { display: none; }
+      .horaires-wrap { margin-top: 12px; }
+    }
+
+    /* Texte footer : icônes seulement sur mobile très étroit */
+    @media (max-width: 380px) {
+      .footer-link .f-label { display: none; }
+      .footer-link { padding: 8px 12px; }
     }
   </style>
 </head>
@@ -379,7 +449,11 @@
     <button class="lang-btn" onclick="setLang('de')">DE</button>
   </div>
 
+  <!-- BACKDROP horaires -->
+  <div class="horaires-backdrop" id="hBackdrop" onclick="closeHoraires()"></div>
+
   <div class="page">
+
     <main class="hero">
 
       <!-- LOGO -->
@@ -406,45 +480,15 @@
         </a>
       </div>
 
-      <!-- HORAIRES ACCORDÉON -->
+      <!-- HORAIRES -->
       <div class="horaires-wrap">
         <button class="horaires-toggle" id="hToggle" onclick="toggleHoraires()">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
           </svg>
           <span data-i18n="hoursBtn">Horaires d'ouverture</span>
           <span class="h-arrow">▾</span>
         </button>
-
-        <div class="horaires-panel" id="hPanel">
-
-          <div class="h-cat-title" data-i18n="cat1">☕ Petit Déjeuner</div>
-          <div class="h-row">
-            <span class="h-days" data-i18n="days1">Lun – Ven</span>
-            <span class="h-time">07:00 – 13:00</span>
-          </div>
-          <div class="h-row">
-            <span class="h-days" data-i18n="days2">Sam · Dim · Fériés</span>
-            <span class="h-time">07:00 – 14:00</span>
-          </div>
-
-          <div class="h-divider"></div>
-
-          <div class="h-cat-title" data-i18n="cat2">🍽️ Service Restaurant</div>
-          <div class="h-row">
-            <span class="h-days" data-i18n="days3">Lun – Ven</span>
-            <span class="h-time">12:00 – 23:00</span>
-          </div>
-          <div class="h-row">
-            <span class="h-days" data-i18n="days4">Samedi</span>
-            <span class="h-time">13:00 – 23:00</span>
-          </div>
-          <div class="h-row">
-            <span class="h-days" data-i18n="days5">Dimanche</span>
-            <span class="h-time">14:00 – 23:00</span>
-          </div>
-
-        </div>
       </div>
 
     </main>
@@ -454,35 +498,74 @@
 
       <a href="https://www.instagram.com/greycornerfes/" target="_blank" rel="noopener" class="footer-link">
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        @greycornerfes
+        <span class="f-label">@greycornerfes</span>
       </a>
 
       <div class="footer-sep"></div>
 
       <a href="https://www.google.com/maps/place/grey+corner/@34.0343959,-5.0168816,18z/data=!3m1!4b1!4m6!3m5!1s0xd9f8b006571fab3:0x996fe2b4d9407471!8m2!3d34.0343959!4d-5.0155941!16s%2Fg%2F11w2bwjz1w" target="_blank" rel="noopener" class="footer-link">
         <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        <span data-i18n="mapLink">Nous trouver</span>
+        <span class="f-label" data-i18n="mapLink">Nous trouver</span>
       </a>
 
       <div class="footer-sep"></div>
 
       <a href="tel:+212535940168" class="footer-link">
         <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-        +212 535 940 168
+        <span class="f-label">+212 535 940 168</span>
       </a>
 
     </footer>
   </div>
 
+  <!-- HORAIRES PANEL (hors du flux pour overlay mobile) -->
+  <div class="horaires-panel" id="hPanel">
+    <div class="panel-handle" onclick="closeHoraires()"></div>
+
+    <div class="h-grid">
+
+      <!-- PETIT DEJ -->
+      <div>
+        <div class="h-cat-title" data-i18n="cat1">☕ Petit Déjeuner</div>
+        <div class="h-row">
+          <span class="h-days" data-i18n="days1">Lun – Ven</span>
+          <span class="h-time">07:00 – 13:00</span>
+        </div>
+        <div class="h-row">
+          <span class="h-days" data-i18n="days2">Sam · Dim · Fériés</span>
+          <span class="h-time">07:00 – 14:00</span>
+        </div>
+      </div>
+
+      <!-- RESTAURANT -->
+      <div>
+        <div class="h-cat-title" data-i18n="cat2">🍽️ Restaurant</div>
+        <div class="h-row">
+          <span class="h-days" data-i18n="days3">Lun – Ven</span>
+          <span class="h-time">12:00 – 23:00</span>
+        </div>
+        <div class="h-row">
+          <span class="h-days" data-i18n="days4">Samedi</span>
+          <span class="h-time">13:00 – 23:00</span>
+        </div>
+        <div class="h-row">
+          <span class="h-days" data-i18n="days5">Dimanche</span>
+          <span class="h-time">14:00 – 23:00</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <script>
-    // TRADUCTIONS
+    // ── TRADUCTIONS ──
     const i18n = {
       fr: {
         location: "Fès \u00a0·\u00a0 Café \u00a0·\u00a0 Restaurant",
         desc:     "Un espace où l'atmosphère fait partie de l'expérience.",
         menuBtn:  "Voir le Menu",
         hoursBtn: "Horaires d'ouverture",
-        cat1: "☕ Petit Déjeuner", cat2: "🍽️ Service Restaurant",
+        cat1: "☕ Petit Déjeuner", cat2: "🍽️ Restaurant",
         days1: "Lun – Ven", days2: "Sam · Dim · Fériés",
         days3: "Lun – Ven", days4: "Samedi", days5: "Dimanche",
         mapLink: "Nous trouver"
@@ -492,7 +575,7 @@
         desc:     "A place where the atmosphere is part of the experience.",
         menuBtn:  "View Menu",
         hoursBtn: "Opening Hours",
-        cat1: "☕ Breakfast", cat2: "🍽️ Restaurant Service",
+        cat1: "☕ Breakfast", cat2: "🍽️ Restaurant",
         days1: "Mon – Fri", days2: "Sat · Sun · Holidays",
         days3: "Mon – Fri", days4: "Saturday", days5: "Sunday",
         mapLink: "Find Us"
@@ -502,7 +585,7 @@
         desc:     "Ein Ort, wo die Atmosphäre zum Erlebnis gehört.",
         menuBtn:  "Speisekarte",
         hoursBtn: "Öffnungszeiten",
-        cat1: "☕ Frühstück", cat2: "🍽️ Restaurant-Service",
+        cat1: "☕ Frühstück", cat2: "🍽️ Restaurant",
         days1: "Mo – Fr", days2: "Sa · So · Feiertage",
         days3: "Mo – Fr", days4: "Samstag", days5: "Sonntag",
         mapLink: "Uns finden"
@@ -522,14 +605,24 @@
     }
 
     function toggleHoraires() {
-      const panel  = document.getElementById('hPanel');
-      const toggle = document.getElementById('hToggle');
-      const open   = panel.classList.contains('open');
-      panel.classList.toggle('open', !open);
-      toggle.classList.toggle('open', !open);
+      const isOpen = document.getElementById('hPanel').classList.contains('open');
+      isOpen ? closeHoraires() : openHoraires();
+    }
+    function openHoraires() {
+      document.getElementById('hPanel').classList.add('open');
+      document.getElementById('hBackdrop').classList.add('open');
+      document.getElementById('hToggle').classList.add('open');
+    }
+    function closeHoraires() {
+      document.getElementById('hPanel').classList.remove('open');
+      document.getElementById('hBackdrop').classList.remove('open');
+      document.getElementById('hToggle').classList.remove('open');
     }
 
-    // Auto-détection langue navigateur
+    // Fermer avec Escape
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeHoraires(); });
+
+    // Auto-détection langue
     (function() {
       const bl = (navigator.language || 'fr').slice(0,2).toLowerCase();
       if (['fr','en','de'].includes(bl)) setLang(bl);
