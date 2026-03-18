@@ -33,7 +33,9 @@ body, html {
     height: 100%;
     z-index: -2;
     overflow: hidden;
-    background: url('images/bg.jpg') center/cover no-repeat; /* fallback */
+
+    /* FALLBACK IMAGE SI VIDEO FAIL */
+    background: url('images/bg.jpg') center/cover no-repeat;
 }
 
 #bg-video {
@@ -47,7 +49,7 @@ body, html {
     z-index: -2;
 }
 
-/* overlay */
+/* Overlay sombre */
 .overlay {
     position: fixed;
     top: 0;
@@ -58,7 +60,7 @@ body, html {
     z-index: -1;
 }
 
-/* contenu */
+/* --- CONTENU --- */
 .content {
     text-align: center;
     z-index: 10;
@@ -79,17 +81,18 @@ h1 {
     font-size: 36px;
     margin: 0;
     font-weight: 700;
-    text-shadow: 2px 2px 15px rgba(0,0,0,0.9);
+    text-shadow: 2px 2px 12px rgba(0,0,0,0.9);
 }
 
 p {
     color: #eee;
     font-size: 16px;
-    margin: 12px 0 45px;
+    margin: 10px 0 45px;
     letter-spacing: 1px;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.9);
 }
 
-/* bouton */
+/* --- BOUTON --- */
 .btn-menu {
     display: block;
     background: var(--gold);
@@ -99,14 +102,15 @@ p {
     border-radius: 50px;
     font-weight: 700;
     font-size: 19px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: 0.2s;
 }
 
 .btn-menu:active {
-    transform: scale(0.97);
+    transform: scale(0.96);
 }
 
-/* langues */
+/* --- LANGUES --- */
 .lang-switcher {
     margin-top: 35px;
     display: flex;
@@ -122,11 +126,14 @@ p {
     border-radius: 10px;
     font-size: 13px;
     cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: 0.3s;
 }
 
 .lang-btn.active {
     border-color: var(--gold);
     color: var(--gold);
+    background: rgba(212,175,55,0.1);
 }
 </style>
 </head>
@@ -135,13 +142,14 @@ p {
 
 <!-- VIDEO -->
 <div id="video-container">
-    <video id="bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
+    <video autoplay loop muted playsinline webkit-playsinline id="bg-video">
         <source src="video/cafe.mp4" type="video/mp4">
     </video>
 </div>
 
 <div class="overlay"></div>
 
+<!-- CONTENU -->
 <div class="content">
     <img src="images/logo.png" class="logo" alt="Grey Corner Logo">
     <h1>Grey Corner</h1>
@@ -159,23 +167,6 @@ p {
 </div>
 
 <script>
-const video = document.getElementById('bg-video');
-
-/* FORCE LECTURE */
-function forcePlay() {
-    video.play().catch(() => {});
-}
-
-document.addEventListener('DOMContentLoaded', forcePlay);
-document.addEventListener('click', forcePlay);
-document.addEventListener('touchstart', forcePlay);
-
-/* SI VIDEO NE CHARGE PAS */
-video.addEventListener('error', () => {
-    console.log("Erreur vidéo → fallback image utilisé");
-});
-
-/* LANGUES */
 const translations = {
     fr: { sub: "Fès • Café • Restaurant", btn: "Voir le Menu" },
     en: { sub: "Fes • Coffee • Restaurant", btn: "View Menu" },
@@ -188,11 +179,24 @@ function setLang(lang) {
 
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.remove('active');
-        if (btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+        if(btn.innerText.toLowerCase() === lang) {
+            btn.classList.add('active');
+        }
     });
 }
 
-/* AUTO LANG */
+/* FORCER LECTURE VIDEO (MOBILE + NAVIGATEURS STRICTS) */
+const video = document.getElementById('bg-video');
+
+function forcePlay() {
+    video.play().catch(() => {});
+}
+
+document.addEventListener('DOMContentLoaded', forcePlay);
+document.addEventListener('touchstart', forcePlay);
+document.addEventListener('click', forcePlay);
+
+/* AUTO LANGUE */
 const userLang = navigator.language.slice(0,2);
 if (translations[userLang]) setLang(userLang);
 </script>
