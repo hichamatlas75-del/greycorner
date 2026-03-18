@@ -1,168 +1,201 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Grey Corner Fès</title>
-    <style>
-        :root {
-            --gold: #D4AF37;
-            --glass: rgba(255, 255, 255, 0.1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Grey Corner Fès</title>
 
-        body, html {
-            margin: 0; padding: 0;
-            height: 100%; width: 100%;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #000;
-            color: #fff;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+<style>
+:root {
+    --gold: #D4AF37;
+}
 
-        /* --- VIDÉO ARRIÈRE-PLAN --- */
-        #video-container {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        #bg-video {
-            position: absolute;
-            top: 50%; left: 50%;
-            min-width: 100%; min-height: 100%;
-            width: auto; height: auto;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-        }
+/* --- VIDÉO --- */
+#video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+    background: url('images/bg.jpg') center/cover no-repeat; /* fallback */
+}
 
-        .overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Ajustez ici pour éclaircir/assombrir la vidéo */
-            z-index: -1;
-        }
+#bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -2;
+}
 
-        /* --- CONTENU --- */
-        .content {
-            text-align: center;
-            z-index: 10;
-            width: 90%;
-            max-width: 350px;
-        }
+/* overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+    z-index: -1;
+}
 
-        .logo {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            margin-bottom: 25px;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
-        }
+/* contenu */
+.content {
+    text-align: center;
+    z-index: 10;
+    width: 90%;
+    max-width: 350px;
+}
 
-        h1 { font-size: 34px; margin: 0; font-weight: 700; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
-        p { color: #eee; font-size: 15px; margin: 10px 0 45px; letter-spacing: 1px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
+.logo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    margin-bottom: 25px;
+    box-shadow: 0 0 30px rgba(212,175,55,0.5);
+}
 
-        /* --- BOUTON MENU --- */
-        .btn-menu {
-            display: block;
-            background: var(--gold);
-            color: #000;
-            text-decoration: none;
-            padding: 18px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 19px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            transition: transform 0.2s;
-        }
+h1 {
+    font-size: 36px;
+    margin: 0;
+    font-weight: 700;
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.9);
+}
 
-        .btn-menu:active { transform: scale(0.97); }
+p {
+    color: #eee;
+    font-size: 16px;
+    margin: 12px 0 45px;
+    letter-spacing: 1px;
+}
 
-        /* --- LANGUES --- */
-        .lang-switcher {
-            margin-top: 35px;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-        }
+/* bouton */
+.btn-menu {
+    display: block;
+    background: var(--gold);
+    color: #000;
+    text-decoration: none;
+    padding: 18px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 19px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
 
-        .lang-btn {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: #fff;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 13px;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-            transition: 0.3s;
-        }
+.btn-menu:active {
+    transform: scale(0.97);
+}
 
-        .lang-btn.active {
-            border-color: var(--gold);
-            color: var(--gold);
-            background: rgba(212, 175, 55, 0.1);
-        }
-    </style>
+/* langues */
+.lang-switcher {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.lang-btn {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.lang-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+</style>
 </head>
+
 <body>
 
-    <div id="video-container">
-        <video autoplay loop muted playsinline id="bg-video">
-            <source src="video/cafe.mp4" type="video/mp4">
-        </video>
+<!-- VIDEO -->
+<div id="video-container">
+    <video id="bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
+        <source src="video/cafe.mp4" type="video/mp4">
+    </video>
+</div>
+
+<div class="overlay"></div>
+
+<div class="content">
+    <img src="images/logo.png" class="logo" alt="Grey Corner Logo">
+    <h1>Grey Corner</h1>
+    <p id="subtitle">Fès • Café • Restaurant</p>
+
+    <a href="https://menugreycorner.pages.dev/" class="btn-menu" id="menu-btn">
+        Voir le Menu
+    </a>
+
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('de')">DE</button>
     </div>
+</div>
 
-    <div class="overlay"></div>
+<script>
+const video = document.getElementById('bg-video');
 
-    <div class="content">
-        <img src="images/logo.png" class="logo" alt="Grey Corner Logo">
-        <h1>Grey Corner</h1>
-        <p id="subtitle">Fès • Café • Restaurant</p>
-        
-        <a href="https://menugreycorner.pages.dev/" class="btn-menu" id="menu-btn">
-            Voir le Menu
-        </a>
+/* FORCE LECTURE */
+function forcePlay() {
+    video.play().catch(() => {});
+}
 
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="setLang('fr')">FR</button>
-            <button class="lang-btn" onclick="setLang('en')">EN</button>
-            <button class="lang-btn" onclick="setLang('de')">DE</button>
-        </div>
-    </div>
+document.addEventListener('DOMContentLoaded', forcePlay);
+document.addEventListener('click', forcePlay);
+document.addEventListener('touchstart', forcePlay);
 
-    <script>
-        const translations = {
-            fr: { sub: "Fès • Café • Restaurant", btn: "Voir le Menu" },
-            en: { sub: "Fes • Coffee • Restaurant", btn: "View Menu" },
-            de: { sub: "Fes • Kaffee • Restaurant", btn: "Menü anzeigen" }
-        };
+/* SI VIDEO NE CHARGE PAS */
+video.addEventListener('error', () => {
+    console.log("Erreur vidéo → fallback image utilisé");
+});
 
-        function setLang(lang) {
-            document.getElementById('subtitle').innerText = translations[lang].sub;
-            document.getElementById('menu-btn').innerText = translations[lang].btn;
+/* LANGUES */
+const translations = {
+    fr: { sub: "Fès • Café • Restaurant", btn: "Voir le Menu" },
+    en: { sub: "Fes • Coffee • Restaurant", btn: "View Menu" },
+    de: { sub: "Fes • Kaffee • Restaurant", btn: "Menü anzeigen" }
+};
 
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if(btn.innerText.toLowerCase() === lang) btn.classList.add('active');
-            });
-        }
+function setLang(lang) {
+    document.getElementById('subtitle').innerText = translations[lang].sub;
+    document.getElementById('menu-btn').innerText = translations[lang].btn;
 
-        // Force la lecture sur mobile si le navigateur bloque l'autoplay
-        window.addEventListener('touchstart', function() {
-            const video = document.getElementById('bg-video');
-            if (video.paused) video.play();
-        }, {once: true});
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+    });
+}
 
-        // Détection auto
-        const userLang = navigator.language.slice(0, 2);
-        if (translations[userLang]) setLang(userLang);
-    </script>
+/* AUTO LANG */
+const userLang = navigator.language.slice(0,2);
+if (translations[userLang]) setLang(userLang);
+</script>
+
 </body>
 </html>
