@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# GPTBot est distinct du robot de recherche ChatGPT.
+# Cette règle exclut l'exploration destinée à l'entraînement.
+User-agent: GPTBot
+Disallow: /
+
+Sitemap: https://greycorner.pages.dev/sitemap.xml
